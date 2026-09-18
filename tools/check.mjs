@@ -18,7 +18,7 @@ const ms = Date.now() - t0;
 
 console.log(`${season} week ${week}: ${model.entries.length} entries, ${model.n_games} games, ${model.n_final} final, ${model.n_live} live, sim ${sim.sims}x in ${ms}ms`);
 if (model.tiebreaker) console.log(`tiebreaker: ${model.tiebreaker.game.away} @ ${model.tiebreaker.game.home} total=${model.tiebreaker.total}`);
-const SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois"];
+const SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda"];
 const fmt = (e) => {
   const s = sim.by_name[e.name];
   return `${String(e.rank).padStart(3)}  ${e.name.padEnd(20)} pts ${String(e.live).padStart(3)} (banked ${String(e.banked).padStart(3)}) max ${String(e.max).padStart(3)} left ${String(e.remaining).padStart(2)} mnf ${String(e.mnf_total).padStart(3)}${e.mnf_diff != null ? ` (±${e.mnf_diff})` : ""}  top8 ${(s.top * 100).toFixed(1).padStart(5)}%  expRank ${s.exp_rank.toFixed(1)}`;
