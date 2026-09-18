@@ -122,9 +122,9 @@ select:hover, .btn:hover { border-color: var(--accent-line); }
   box-shadow: var(--shadow);
 }
 
-/* ---------- The Six: summary tiles ---------- */
+/* ---------- The Crew: summary tiles ---------- */
 .six-tiles {
-  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-2);
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s-2);
 }
 .tile {
   padding: var(--s-3); border-radius: var(--r); background: var(--surface); border: var(--hair);
@@ -142,7 +142,7 @@ select:hover, .btn:hover { border-color: var(--accent-line); }
 .bar { height: 4px; border-radius: 2px; background: var(--surface-3); overflow: hidden; margin-top: 4px; }
 .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 2px; transition: width .4s var(--ease); }
 
-/* ---------- The Six: picks grid ---------- */
+/* ---------- The Crew: picks grid ---------- */
 .grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: var(--r); }
 table.grid { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--fs-12); }
 table.grid th, table.grid td { padding: 6px 4px; border-bottom: var(--hair); text-align: center; white-space: nowrap; }

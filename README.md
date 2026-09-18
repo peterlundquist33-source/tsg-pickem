@@ -1,6 +1,6 @@
 # TSG Football Pool — pick'em tracker
 
-Live standings for the TSG Football Pool (Mike DuBois' office confidence pick'em, ~81 entries), with a spotlight on The Six: Peter, Christian, Mitch, Noah, Logan, Sam.
+Live standings for the TSG Football Pool (Mike DuBois' office confidence pick'em, ~81 entries), with a spotlight on The Crew: Peter, Christian, Mitch, Noah, Logan, Sam, CJ.
 
 **Site:** https://peterlundquist33-source.github.io/tsg-pickem/
 
@@ -8,7 +8,7 @@ Static HTML/CSS/JS on GitHub Pages, no framework, no build step. Python tools in
 
 ## What the page shows
 
-- **The Six** — side-by-side picks grid (pick + confidence points, green/red as games finish, dashed while in progress), points, max possible, rank, projected finish, and chance of finishing top 8.
+- **The Crew** — side-by-side picks grid (pick + confidence points, green/red as games finish, dashed while in progress), points, max possible, rank, projected finish, and chance of finishing top 8.
 - **Games** — each matchup's score/status/kickoff, how much of the pool is on each side with their average confidence, and ESPN's line or live win probability.
 - **Standings** — everyone: rank, points, max, picks left, MNF tiebreaker, top-8 %. Sortable, searchable, gold line under the pay spots.
 

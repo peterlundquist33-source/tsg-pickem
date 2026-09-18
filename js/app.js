@@ -1,10 +1,10 @@
 /* TSG Pick'em — page behaviour. Loads the week's picks + results, overlays
  * live ESPN scores when the browser can reach them, and renders the three
- * views: The Six, the game strip, and the full standings. */
+ * views: The Crew, the game strip, and the full standings. */
 (function () {
   "use strict";
 
-  var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois"];
+  var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda"];
   var ME = "Peter Lundquist";
   var SIMS = 5000;
 
