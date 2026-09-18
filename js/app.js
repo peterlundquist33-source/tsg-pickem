@@ -369,6 +369,19 @@
       refreshLive().then(scheduleRefresh);
     });
     $("find").addEventListener("input", function () { state.filter = this.value; renderStandings(); });
+
+    // "How does this work" dialog. Native <dialog>; falls back to the open attribute where showModal is missing.
+    var help = $("help");
+    function openHelp(ev) {
+      if (ev) ev.preventDefault();
+      if (help.showModal) help.showModal(); else help.setAttribute("open", "");
+      help.querySelector(".help-body").scrollTop = 0;
+    }
+    function closeHelp() { if (help.close) help.close(); else help.removeAttribute("open"); }
+    $("help-btn").addEventListener("click", openHelp);
+    $("help-link").addEventListener("click", openHelp);
+    $("help-close").addEventListener("click", closeHelp);
+    help.addEventListener("click", function (ev) { if (ev.target === help) closeHelp(); }); // tap the backdrop to close
     document.addEventListener("visibilitychange", function () {
       if (document.visibilityState === "visible" && state.model && !state.model.all_final) refreshLive().then(scheduleRefresh);
     });

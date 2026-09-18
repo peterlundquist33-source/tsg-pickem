@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0e1117">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 
@@ -23,6 +23,9 @@
       <select id="week" aria-label="Week"></select>
       <button class="btn" id="refresh" title="Refresh scores" aria-label="Refresh scores">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+      </button>
+      <button class="btn help-btn" id="help-btn" aria-haspopup="dialog" aria-controls="help">
+        <span class="q">?</span><span class="help-label">How does this work</span>
       </button>
     </div>
   </div>
@@ -65,14 +68,62 @@
   </section>
 
   <div class="notes" id="notes">
-    <p><b>Scoring</b> (confirmed against Mike's week 1 results): a correct pick earns its confidence points, a wrong pick earns 0. Rank by total; ties broken by closeness to the actual total points of the Monday night game. Top 8 get paid.</p>
-    <p><b>Assumed:</b> a tied NFL game pays nobody. <b>Top 8 %</b> is a 5,000-run simulation of the unfinished games using ESPN's win probability (live model in-game, de-vigged moneyline pregame; 50/50 if neither exists). Tied entries share a pay spot. <b>Pts</b> counts finished games plus games your pick currently leads; <b>Max</b> is if every remaining pick hits.</p>
-    <p>Scores from ESPN. Picks from the weekly workbook Mike emails after lockdown. <a href="https://github.com/peterlundquist33-source/tsg-pickem">Source</a>.</p>
+    <p>Scores from ESPN, refreshed automatically during games. Picks from the workbook Mike emails after Thursday lockdown. Confused by a number? <a href="#" id="help-link">How does this work</a> · <a href="https://github.com/peterlundquist33-source/tsg-pickem">Source</a>.</p>
   </div>
 </main>
 
+<dialog id="help" class="help" aria-labelledby="help-title">
+  <div class="help-head">
+    <h2 id="help-title">How does this work?</h2>
+    <button class="btn" id="help-close" aria-label="Close">✕</button>
+  </div>
+  <div class="help-body">
+
+    <h3>The pool in one breath</h3>
+    <p>Every week you pick the winner of all 16 games and rank your picks 1–16 by how sure you are (16 = most confident). Get a pick right, you earn that many points. Get it wrong, you earn 0. Most points wins the week. <b>Top 8 get paid.</b> Ties are settled by whoever guessed closest to the total points scored in the Monday night game.</p>
+
+    <h3>The Crew</h3>
+    <p>The seven of us, pulled out of the crowd so you don't have to scroll. Each tile shows:</p>
+    <ul>
+      <li><b>Big number / small number</b> — points you've earned so far <i>/</i> the most you could still finish with.</li>
+      <li><b>Rank</b> — where you sit in the whole pool right now. Green means you're in the top 8. A "T" means you're tied.</li>
+      <li><b>Left</b> — how many of your picks haven't finished yet.</li>
+      <li><b>Proj.</b> — where the computer expects you to finish once the week plays out.</li>
+      <li><b>Top 8</b> — your odds of finishing in the money (see below).</li>
+    </ul>
+    <p>Below the tiles is the picks grid: every game, everyone's pick and the points on it. <span class="k win">Green</span> = pick won. <span class="k loss">Red</span> = pick lost. <span class="k lead">Dashed green</span> = game in progress and your team is ahead. <span class="k trail">Dashed red</span> = in progress and behind. Grey = hasn't kicked off. The bottom rows total it up and show each person's Monday night tiebreaker guess.</p>
+
+    <h3>Games</h3>
+    <p>One card per matchup with the score and status. The bar shows how the pool split: the longer side is where more people went. Under each team is the share of the pool on it and the average points they risked. A game where 90% of people are on one side at 12 points is a "chalk" game; a 55/45 split is where the week gets decided.</p>
+
+    <h3>Standings</h3>
+    <p>Everybody in the pool, live. Tap a column header to sort, or type a name to find someone.</p>
+    <ul>
+      <li><b>Pts</b> — points from finished games, plus games where your pick is currently leading. It can go down if a team blows a lead.</li>
+      <li><b>Max</b> — your total if every remaining pick hits. If your Max is below 8th place's Pts, your week is over.</li>
+      <li><b>Left</b> — unfinished picks.</li>
+      <li><b>MNF</b> — the tiebreaker guess. Once Monday night ends you'll see ± how far off it was.</li>
+      <li><b>Top 8</b> — odds of finishing in the money.</li>
+    </ul>
+    <p>The <span class="k gold">gold line</span> is the pay line: above it you get paid, below it you don't. Crew members are highlighted in green.</p>
+
+    <h3>What "Top 8 %" actually means</h3>
+    <p>The page plays out the rest of the week 5,000 times. For each unfinished game it uses ESPN's win probability (the live in-game number once a game starts; the betting line before kickoff) to decide who wins, then re-scores everyone and checks who lands in the top 8. Your percentage is how often you made it. So 40% means "in 2,000 of 5,000 pretend weekends, you got paid." Before Sunday it's mostly about how much chalk you took; by Sunday night it's mostly math on the games left. When all games are final it's simply 100% or 0%.</p>
+
+    <h3>How it stays current</h3>
+    <ul>
+      <li><b>Picks:</b> Mike's system emails the locked workbook Thursday evening. It's loaded onto this site automatically that night.</li>
+      <li><b>Scores:</b> pulled straight from ESPN while the page is open, roughly every 45 seconds during games. Tap ↻ to force it.</li>
+      <li><b>Weeks:</b> the dropdown up top lets you look back at any week that's been loaded.</li>
+    </ul>
+
+    <h3>Fine print</h3>
+    <p>Scoring rules were checked against Mike's official Week 1 results and match exactly. One assumption: a tied NFL game pays nobody. This site isn't the official scoreboard, Mike's is. If the two ever disagree, Mike wins.</p>
+  </div>
+</dialog>
+
 <script src="js/pool.js?v=1"></script>
 <script src="js/espn.js?v=1"></script>
-<script src="js/app.js?v=2"></script>
+<script src="js/app.js?v=3"></script>
 </body>
 </html>
