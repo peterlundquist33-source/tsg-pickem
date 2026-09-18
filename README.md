@@ -1,6 +1,6 @@
 # TSG Football Pool — pick'em tracker
 
-Live standings for the TSG Football Pool (Mike DuBois' office confidence pick'em, ~81 entries), with a spotlight on The Crew: Peter, Christian, Mitch, Noah, Logan, Sam, CJ.
+Live standings for the TSG Football Pool (Mike DuBois' office confidence pick'em, ~81 entries), with a spotlight on The Crew: Peter, Christian, Mitch, Noah, Logan Rezac, Sam, CJ, Logan Gacke.
 
 **Site:** https://peterlundquist33-source.github.io/tsg-pickem/
 

@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda"];
+  var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda", "Logan Gacke"];
   var ME = "Peter Lundquist";
   var SIMS = 5000;
 
@@ -24,7 +24,12 @@
     });
   }
   function pct(x, d) { return x == null ? "–" : (x * 100).toFixed(d == null ? 0 : d) + "%"; }
-  function firstName(n) { return String(n).split(" ")[0]; }
+  // Short label for a Crew member: first name, plus last initial when two share a first name (the Logans).
+  function firstName(n) {
+    var parts = String(n).trim().split(/\s+/), first = parts[0];
+    var dup = SIX.filter(function (s) { return s.split(/\s+/)[0].toLowerCase() === first.toLowerCase(); }).length > 1;
+    return dup && parts.length > 1 ? first + " " + parts[parts.length - 1][0] + "." : first;
+  }
   function norm(n) { return String(n || "").toLowerCase().replace(/\s+/g, " ").trim(); }
   function isSix(name) { var k = norm(name); return SIX.some(function (s) { return norm(s) === k; }); }
   function isMe(name) { return norm(name) === norm(ME); }
