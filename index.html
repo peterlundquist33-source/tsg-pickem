@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TSG Football Pool — Pick'em Tracker</title>
+<meta name="description" content="Live standings, The Six, and top-8 odds for the TSG Football Pool confidence pick'em.">
+<meta name="theme-color" content="#0e1117">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="eyebrow">TSG Football Pool</span>
+      <h1 id="title">Pick'em Tracker</h1>
+    </div>
+    <div class="controls">
+      <label class="dim" for="week" style="font-size:.75rem">Week</label>
+      <select id="week" aria-label="Week"></select>
+      <button class="btn" id="refresh" title="Refresh scores" aria-label="Refresh scores">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="status-bar" id="status"><span class="dot"></span> Loading…</div>
+
+  <section id="six-section">
+    <div class="section-head">
+      <h2>The Six</h2>
+      <span class="sub" id="six-sub"></span>
+    </div>
+    <div class="six-tiles" id="six-tiles"></div>
+    <div class="card grid-wrap" style="margin-top:8px">
+      <table class="grid" id="six-grid"></table>
+    </div>
+  </section>
+
+  <section id="games-section">
+    <div class="section-head">
+      <h2>Games</h2>
+      <span class="sub">Bar = share of the pool on each side · avg confidence points</span>
+    </div>
+    <div class="games" id="games"></div>
+  </section>
+
+  <section id="standings-section">
+    <div class="section-head">
+      <h2>Standings</h2>
+      <span class="sub" id="standings-sub"></span>
+    </div>
+    <div class="toolbar">
+      <input type="search" id="find" placeholder="Find a name…" aria-label="Find a name">
+      <span class="legend"><i style="background:var(--gold)"></i>top 8 pay line &nbsp; <i style="background:var(--accent)"></i>The Six</span>
+    </div>
+    <div class="card table-wrap">
+      <table class="standings" id="standings"></table>
+    </div>
+  </section>
+
+  <div class="notes" id="notes">
+    <p><b>Scoring</b> (confirmed against Mike's week 1 results): a correct pick earns its confidence points, a wrong pick earns 0. Rank by total; ties broken by closeness to the actual total points of the Monday night game. Top 8 get paid.</p>
+    <p><b>Assumed:</b> a tied NFL game pays nobody. <b>Top 8 %</b> is a 5,000-run simulation of the unfinished games using ESPN's win probability (live model in-game, de-vigged moneyline pregame; 50/50 if neither exists). Tied entries share a pay spot. <b>Pts</b> counts finished games plus games your pick currently leads; <b>Max</b> is if every remaining pick hits.</p>
+    <p>Scores from ESPN. Picks from the weekly workbook Mike emails after lockdown. <a href="https://github.com/peterlundquist33-source/tsg-pickem">Source</a>.</p>
+  </div>
+</main>
+
+<script src="js/pool.js?v=1"></script>
+<script src="js/espn.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+</body>
+</html>

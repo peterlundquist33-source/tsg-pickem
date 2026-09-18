@@ -1,0 +1,13 @@
+# local workbooks — never commit the emailed xlsx
+*.xlsx
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# node (only for the local smoke test)
+node_modules/
+package-lock.json
+
+.DS_Store
