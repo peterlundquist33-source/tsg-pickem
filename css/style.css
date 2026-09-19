@@ -101,6 +101,20 @@ select, .btn {
 }
 select:hover, .btn:hover { border-color: var(--accent-line); }
 .btn.spin svg { animation: spin .8s linear infinite; }
+/* Week | Season segmented control */
+.tabs {
+  display: inline-flex; background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.tabs button {
+  background: transparent; border: 0; padding: 6px 12px; font-size: var(--fs-13); color: var(--text-2);
+  transition: background .15s var(--ease), color .15s var(--ease);
+}
+.tabs button + button { border-left: 1px solid var(--line-2); }
+.tabs button:hover { color: var(--text); }
+.tabs button[aria-selected="true"] { background: var(--accent-tint); color: var(--accent); font-weight: 600; }
+body.view-season .week-ctl { display: none; }
+.note { font-size: var(--fs-12); color: var(--text-3); max-width: 78ch; margin: -4px 0 var(--s-3); }
 @keyframes spin { to { transform: rotate(360deg); } }
 .status-bar {
   display: flex; align-items: center; gap: var(--s-2); flex-wrap: wrap;
@@ -173,6 +187,17 @@ table.grid .g-sub.live { color: var(--pos); }
 table.grid tfoot td { background: var(--surface-2); font-weight: 600; border-top: 1px solid var(--line-2); }
 table.grid tfoot td:first-child { background: var(--surface-2); color: var(--text-2); font-weight: 500; }
 table.grid tfoot .hot { color: var(--accent); }
+
+/* ---------- The Crew: season week strip ---------- */
+table.season-grid th:first-child, table.season-grid td:first-child { min-width: 64px; }
+.cell.wk        { color: var(--text-2); border-color: var(--line-2); min-width: 72px; }
+.cell.wk .p     { color: var(--text-3); }
+.cell.wk.top8   { background: rgba(245, 196, 81, .12); color: var(--gold); border-color: rgba(245, 196, 81, .45); }
+.cell.wk.top8 .p{ color: var(--gold); }
+.cell.wk.live   { border-style: dashed; }
+.cell.wk.miss   { color: var(--text-3); border-color: transparent; }
+table.grid tfoot .gold { color: var(--gold); }
+.tile .row b.gold { color: var(--gold); }
 
 /* ---------- game strip ---------- */
 .games {
@@ -252,6 +277,9 @@ table.standings tr.hidden { display: none; }
   table.grid th, table.grid td { padding: 5px 2px; }
   .cell { min-width: 50px; padding: 3px 4px; font-size: var(--fs-11); }
   table.grid th:first-child, table.grid td:first-child { min-width: 74px; padding-left: var(--s-2); }
+  table.season-grid th:first-child, table.season-grid td:first-child { min-width: 52px; }
+  .cell.wk { min-width: 62px; }
+  .tabs button { padding: 6px 10px; }
   .games { grid-template-columns: 1fr 1fr; }
   .game .tm .nm { display: none; }
   table.standings th, table.standings td { padding: 6px 6px; }

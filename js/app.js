@@ -1,12 +1,15 @@
 /* TSG Pick'em — page behaviour. Loads the week's picks + results, overlays
  * live ESPN scores when the browser can reach them, and renders the three
- * views: The Crew, the game strip, and the full standings. */
+ * views: The Crew, the game strip, and the full standings. The Season tab
+ * loads every ingested week and folds them with Pool.buildSeason. */
 (function () {
   "use strict";
 
   var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda", "Logan Gacke"];
   var ME = "Peter Lundquist";
   var SIMS = 5000;
+  var VIEW_KEY = "tsg.view";           // localStorage: last tab ("week" | "season")
+  var SEASON_TTL = 60e3;               // re-read the committed season files at most this often
 
   var $ = function (id) { return document.getElementById(id); };
   var state = {
@@ -14,7 +17,10 @@
     weekDoc: null, resultsDoc: null, liveDoc: null, liveError: null,
     model: null, sim: null,
     sort: { key: "rank", dir: 1 }, filter: "",
-    timer: null, loading: false
+    timer: null, loading: false,
+    view: "week",
+    seasonDocs: null, seasonModel: null, seasonLoading: false,
+    seasonSort: { key: "rank", dir: 1 }
   };
 
   // ---------- utils ----------
@@ -24,6 +30,8 @@
     });
   }
   function pct(x, d) { return x == null ? "–" : (x * 100).toFixed(d == null ? 0 : d) + "%"; }
+  function ordinal(n) { var v = n % 100, t = ["th", "st", "nd", "rd"]; return n + (t[(v - 20) % 10] || t[v] || t[0]); }
+  function money(x) { return "$" + (x % 1 ? x.toFixed(2) : x); }
   // Short label for a Crew member: first name, plus last initial when two share a first name (the Logans).
   function firstName(n) {
     var parts = String(n).trim().split(/\s+/), first = parts[0];
@@ -73,6 +81,64 @@
     state.model = model;
     state.sim = model.all_final ? Pool.settle(model) : Pool.simulate(model, { sims: SIMS, seed: 20260918 + model.week });
     renderAll();
+    if (state.seasonDocs) computeSeason(); // the open week feeds the season view with its live points
+  }
+
+  // ---------- season ----------
+  function seasonIndexFile(season) { return "data/" + season + "/index.json"; }
+
+  // Every ingested week's picks + committed results. Cached briefly so tab
+  // flips are instant; Actions pushes new results at most every 10 minutes.
+  function loadSeason(season, force) {
+    var docs = state.seasonDocs;
+    if (docs && docs.season === season && !force && Date.now() - docs.at < SEASON_TTL) return Promise.resolve(docs);
+    if (state.seasonLoading) return state.seasonLoading;
+    setSpin(true);
+    state.seasonLoading = fetchJSON(seasonIndexFile(season)).then(function (idx) {
+      var weeks = (idx.weeks || []).slice().sort(function (a, b) { return a - b; });
+      return Promise.all(weeks.map(function (w) {
+        return Promise.all([fetchJSON(weekFile(season, w)), fetchJSON(resultsFile(season, w)).catch(function () { return null; })])
+          .then(function (r) { return { week: w, weekDoc: r[0], resultsDoc: r[1] }; });
+      }));
+    }).then(function (weeks) {
+      state.seasonDocs = { season: season, weeks: weeks, at: Date.now() };
+      return state.seasonDocs;
+    }).finally(function () { state.seasonLoading = false; setSpin(false); });
+    return state.seasonLoading;
+  }
+
+  function computeSeason() {
+    var docs = state.seasonDocs; if (!docs) return;
+    var models = docs.weeks.map(function (d) {
+      // the week open in the Week tab already has the freshest (live ESPN) results
+      if (state.model && docs.season === state.season && d.week === state.week) return state.model;
+      return Pool.buildWeek(d.weekDoc, d.resultsDoc);
+    });
+    state.seasonModel = Pool.buildSeason(models);
+    if (state.view === "season") renderSeason();
+  }
+
+  function setView(view) {
+    state.view = view === "season" ? "season" : "week";
+    try { localStorage.setItem(VIEW_KEY, state.view); } catch (e) { /* private mode */ }
+    var season = state.view === "season";
+    document.body.classList.toggle("view-season", season);
+    $("view-week").hidden = season;
+    $("view-season").hidden = !season;
+    $("tab-week").setAttribute("aria-selected", season ? "false" : "true");
+    $("tab-season").setAttribute("aria-selected", season ? "true" : "false");
+    renderHeader();
+    if (season) {
+      $("find-season").value = state.filter;
+      var yr = state.season || (state.index && state.index.latest && state.index.latest.season);
+      if (!yr) return;
+      if (state.seasonModel && state.seasonModel.season === yr) renderSeason();
+      else setStatus("Loading season " + yr + "…", null);
+      loadSeason(yr).then(computeSeason).catch(function (e) { setStatus("Could not load season " + yr + ": " + e.message, "error"); });
+    } else {
+      $("find").value = state.filter;
+      if (state.model) renderAll();
+    }
   }
 
   function loadWeek(season, week) {
@@ -136,7 +202,19 @@
     $("status").innerHTML = '<span class="dot"></span> <span class="' + (cls || "") + '">' + esc(text) + "</span>";
   }
 
+  function renderHeader() {
+    if (state.view === "season") {
+      var yr = (state.seasonModel && state.seasonModel.season) || state.season || "";
+      $("title").textContent = "Season " + yr;
+      document.title = "TSG Pool — Season " + yr;
+    } else if (state.model) {
+      $("title").textContent = "Week " + state.model.week + " · " + state.model.season;
+      document.title = "TSG Pool — Week " + state.model.week;
+    }
+  }
+
   function renderStatus() {
+    if (state.view === "season") { renderSeasonStatus(); return; }
     var m = state.model; if (!m) return;
     var parts = [];
     var live = m.n_live > 0;
@@ -158,10 +236,8 @@
   }
 
   function renderAll() {
-    var m = state.model;
-    $("title").textContent = "Week " + m.week + " · " + m.season;
-    document.title = "TSG Pool — Week " + m.week;
-    renderStatus();
+    renderHeader();
+    if (state.view === "week") renderStatus();
     renderSix();
     renderGames();
     renderStandings();
@@ -336,6 +412,141 @@
     });
   }
 
+  // ---------- render: season ----------
+  function renderSeason() {
+    renderHeader();
+    renderSeasonStatus();
+    renderSeasonSix();
+    renderSeasonTable();
+  }
+
+  function renderSeasonStatus() {
+    var s = state.seasonModel; if (!s) return;
+    var parts = [];
+    var liveWeek = s.in_progress.length && state.model && s.in_progress.indexOf(state.model.week) >= 0 && state.model.n_live > 0;
+    parts.push('<span class="dot' + (liveWeek ? " live" : "") + '"></span>');
+    parts.push("<b>" + s.weeks.length + "</b> week" + (s.weeks.length === 1 ? "" : "s") + " loaded · <b>" + s.n_final_weeks + "</b> final");
+    if (s.in_progress.length) {
+      var w = s.weeks.filter(function (x) { return !x.final; }).map(function (x) {
+        return "week " + x.week + " " + x.n_final + "/" + x.n_games + " final" + (x.n_live ? " · <b class='pos'>" + x.n_live + " live</b>" : "");
+      }).join(", ");
+      parts.push('<span class="dim">·</span> <span class="pill' + (liveWeek ? " live" : "") + '">in progress</span> ' + w);
+    }
+    $("status").innerHTML = parts.join(" ");
+  }
+
+  function weekChip(w) {
+    if (!w) return '<span class="cell wk miss" title="not in that week\'s sheet">–</span>';
+    var cls = "cell wk" + (w.top8 ? " top8" : "") + (w.final ? "" : " live");
+    var title = w.pts + " pts, " + (w.tied ? "tied " : "") + ordinal(w.rank) + (w.final ? (w.money ? ", won " + money(w.money) : "") : " (in progress)");
+    return '<span class="' + cls + '" title="' + esc(title) + '">' + w.pts + ' <span class="p">· ' + (w.tied ? "T" : "") + ordinal(w.rank) + "</span></span>";
+  }
+
+  function renderSeasonSix() {
+    var s = state.seasonModel;
+    var byName = {};
+    s.standings.forEach(function (e) { byName[norm(e.name)] = e; });
+    var six = SIX.map(function (n) { return byName[norm(n)] || null; });
+    var missing = SIX.filter(function (n, i) { return !six[i]; });
+    $("season-six-sub").textContent = missing.length ? "Not in any sheet yet: " + missing.join(", ")
+      : (s.in_progress.length ? "Week " + s.in_progress.join(", ") + " in progress · live points" : "All weeks final");
+
+    $("season-tiles").innerHTML = SIX.map(function (n, i) {
+      var e = six[i];
+      if (!e) return '<div class="tile"><div class="name">' + esc(n) + '</div><div class="dim">not in sheet</div></div>';
+      return '<div class="tile' + (isMe(e.name) ? " me" : "") + '">' +
+        '<div class="name">' + esc(firstName(e.name)) + '</div>' +
+        '<div class="big">' + e.total + "<small>pts" + (e.live_pts ? ' <span class="live-dot" title="includes ' + e.live_pts + ' live pts"></span>' : "") + "</small></div>" +
+        '<div class="row"><span>Season rank</span><b>' + (e.tied ? "T" : "") + e.rank + "</b></div>" +
+        '<div class="row"><span>Top 8 weeks</span><b' + (e.top8 ? ' class="gold"' : "") + ">" + e.top8 + "</b></div>" +
+        '<div class="row"><span>Best week</span><b>' + (e.best == null ? "–" : e.best + ' <span class="dim">W' + e.best_week + "</span>") + "</b></div>" +
+        '<div class="row"><span>Avg finish</span><b>' + (e.avg_finish == null ? "–" : e.avg_finish.toFixed(1)) + "</b></div>" +
+        '<div class="row"><span>Money</span><b' + (e.money ? ' class="gold"' : "") + ">" + money(e.money) + "</b></div>" +
+        "</div>";
+    }).join("");
+
+    // week-by-week strip: one row per week, one column per Crew member
+    var head = "<thead><tr><th>Week</th>" + SIX.map(function (n, i) {
+      return "<th" + (six[i] && isMe(six[i].name) ? ' class="me"' : "") + ">" + esc(firstName(n)) + "</th>";
+    }).join("") + "</tr></thead>";
+    var body = "<tbody>" + s.weeks.map(function (w, wi) {
+      var sub = w.final ? "Final" : w.n_final + " of " + w.n_games + " final" + (w.n_live ? " · " + w.n_live + " live" : "");
+      var cells = six.map(function (e) { return "<td>" + (e ? weekChip(e.per_week[wi]) : "") + "</td>"; }).join("");
+      return "<tr><td><span class='g-line'>W" + w.week + "</span><span class='g-sub" + (w.final ? "" : " live") + "'>" + esc(sub) + "</span></td>" + cells + "</tr>";
+    }).join("") + "</tbody>";
+    var foot = "<tfoot>" +
+      "<tr><td>Total</td>" + six.map(function (e) { return "<td>" + (e ? e.total : "") + "</td>"; }).join("") + "</tr>" +
+      "<tr><td>Top 8</td>" + six.map(function (e) { return "<td" + (e && e.top8 ? ' class="gold"' : "") + ">" + (e ? e.top8 : "") + "</td>"; }).join("") + "</tr>" +
+      "<tr><td>Money</td>" + six.map(function (e) { return "<td" + (e && e.money ? ' class="gold"' : "") + ">" + (e ? money(e.money) : "") + "</td>"; }).join("") + "</tr>" +
+      "<tr><td>Rank</td>" + six.map(function (e) { return "<td>" + (e ? (e.tied ? "T" : "") + e.rank : "") + "</td>"; }).join("") + "</tr>" +
+      "</tfoot>";
+    $("season-grid").innerHTML = head + body + foot;
+  }
+
+  var SEASON_COLS = [
+    { key: "rank", label: "#", num: false },
+    { key: "name", label: "Name", num: false },
+    { key: "total", label: "Pts", num: true, title: "Season total; the current week counts its live points" },
+    { key: "played", label: "Wks", num: true, title: "Weeks with a sheet submitted" },
+    { key: "top8", label: "Top 8", num: true, title: "Top-8 finishes (finished weeks only)" },
+    { key: "wins", label: "Wins", num: true, title: "Weekly wins (finished weeks only)" },
+    { key: "best", label: "Best", num: true, title: "Best single week" },
+    { key: "avg_finish", label: "Avg fin", num: true, title: "Average weekly finish" },
+    { key: "money", label: "Money", num: true, title: "Cumulative payouts, finished weeks only; ties split the pooled money" }
+  ];
+
+  function renderSeasonTable() {
+    var s = state.seasonModel;
+    var sk = state.seasonSort.key, dir = state.seasonSort.dir;
+    var rows = s.standings.slice().sort(function (a, b) {
+      var av = a[sk], bv = b[sk];
+      if (av == null && bv == null) return a.rank - b.rank;
+      if (av == null) return 1; if (bv == null) return -1;
+      if (typeof av === "string") return dir * av.localeCompare(bv);
+      if (av !== bv) return dir * (av - bv);
+      return a.rank - b.rank;
+    });
+
+    var head = "<thead><tr>" + SEASON_COLS.map(function (c) {
+      var sort = c.key === sk ? (dir === 1 ? "ascending" : "descending") : "none";
+      return '<th data-key="' + c.key + '"' + (c.num ? ' class="num"' : "") + ' aria-sort="' + sort + '"' + (c.title ? ' title="' + esc(c.title) + '"' : "") + ">" + esc(c.label) + "</th>";
+    }).join("") + "</tr></thead>";
+
+    var f = norm(state.filter);
+    var body = "<tbody>" + rows.map(function (e) {
+      var cls = [];
+      if (isSix(e.name)) cls.push("six");
+      if (isMe(e.name)) cls.push("me");
+      if (f && norm(e.name).indexOf(f) < 0) cls.push("hidden");
+      var liveDot = e.live_pts ? '<span class="live-dot" title="includes ' + e.live_pts + ' pts from the week in progress"></span>' : "";
+      var missed = e.per_week.some(function (w) { return !w; });
+      return '<tr class="' + cls.join(" ") + '">' +
+        '<td class="rank' + (e.tied ? " tie" : "") + '">' + e.rank + "</td>" +
+        '<td class="name">' + esc(e.name) + "</td>" +
+        '<td class="num">' + e.total + liveDot + "</td>" +
+        '<td class="num"' + (missed ? ' title="missed ' + e.per_week.filter(function (w) { return !w; }).length + ' week(s)"' : "") + ">" + e.played + (missed ? '<span class="dim">/' + e.per_week.length + "</span>" : "") + "</td>" +
+        '<td class="num">' + (e.top8 || '<span class="dim">–</span>') + "</td>" +
+        '<td class="num">' + (e.wins || '<span class="dim">–</span>') + "</td>" +
+        '<td class="num">' + (e.best == null ? "–" : e.best + ' <span class="dim">W' + e.best_week + "</span>") + "</td>" +
+        '<td class="num">' + (e.avg_finish == null ? "–" : e.avg_finish.toFixed(1)) + "</td>" +
+        '<td class="num">' + (e.money ? money(e.money) : '<span class="dim">$0</span>') + "</td>" +
+        "</tr>";
+    }).join("") + "</tbody>";
+    $("season-standings").innerHTML = head + body;
+    $("season-sub").textContent = s.standings.length + " entries · " + s.n_final_weeks + " week" + (s.n_final_weeks === 1 ? "" : "s") + " final" +
+      (s.in_progress.length ? " · week " + s.in_progress.join(", ") + " in progress" : "");
+
+    Array.prototype.forEach.call($("season-standings").querySelectorAll("th"), function (th) {
+      th.addEventListener("click", function () {
+        var key = th.getAttribute("data-key");
+        var def = (key === "rank" || key === "name" || key === "avg_finish") ? 1 : -1;
+        if (state.seasonSort.key === key) state.seasonSort.dir = -state.seasonSort.dir;
+        else state.seasonSort = { key: key, dir: def };
+        renderSeasonTable();
+      });
+    });
+  }
+
   // ---------- boot ----------
   function populateWeeks() {
     var idx = state.index, sel = $("week");
@@ -362,8 +573,17 @@
       var ok = opts.some(function (o) { return o.season === season && o.week === week; });
       if (!ok) { season = idx.latest.season; week = idx.latest.week; }
       $("week").value = season + ":" + week;
-      loadWeek(season, week);
+      var p = loadWeek(season, week);
+      if (state.view === "season") p.then(function () { setView("season"); });
     }).catch(function (e) { setStatus("Could not load data/index.json: " + e.message, "error"); });
+
+    // last tab wins; the Week view is the default
+    var saved = null;
+    try { saved = localStorage.getItem(VIEW_KEY); } catch (e) { /* private mode */ }
+    if (saved === "season") setView("season");
+    Array.prototype.forEach.call(document.querySelectorAll(".tabs [data-view]"), function (b) {
+      b.addEventListener("click", function () { setView(b.getAttribute("data-view")); });
+    });
 
     $("week").addEventListener("change", function () {
       var p = this.value.split(":");
@@ -371,9 +591,12 @@
     });
     $("refresh").addEventListener("click", function () {
       if (state.loading) return;
-      refreshLive().then(scheduleRefresh);
+      refreshLive().then(function () {
+        if (state.view === "season" && state.season) return loadSeason(state.season, true).then(computeSeason);
+      }).then(scheduleRefresh);
     });
     $("find").addEventListener("input", function () { state.filter = this.value; renderStandings(); });
+    $("find-season").addEventListener("input", function () { state.filter = this.value; if (state.seasonModel) renderSeasonTable(); });
 
     // "How does this work" dialog. Native <dialog>; falls back to the open attribute where showModal is missing.
     var help = $("help");

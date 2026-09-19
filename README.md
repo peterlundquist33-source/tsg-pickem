@@ -11,6 +11,7 @@ Static HTML/CSS/JS on GitHub Pages, no framework, no build step. Python tools in
 - **The Crew** — side-by-side picks grid (pick + confidence points, green/red as games finish, dashed while in progress), points, max possible, rank, projected finish, and chance of finishing top 8.
 - **Games** — each matchup's score/status/kickoff, how much of the pool is on each side with their average confidence, and ESPN's line or live win probability.
 - **Standings** — everyone: rank, points, max, picks left, MNF tiebreaker, top-8 %. Sortable, searchable, gold line under the pay spots.
+- **Season tab** (header toggle, remembered in localStorage) — season-to-date for the whole pool: total points, weeks played, top-8 finishes, weekly wins, best week, average finish, money. The Crew get tiles plus a week-by-week strip (points · finish per week, gold when top-8, dashed while the week is in progress). Every ingested week is loaded and scored with the same `Pool` code as the weekly view; the week open in the Week tab feeds in its live points. Season rank is by total points (tiebreak: top-8 finishes, then best week) — that's our leaderboard, not the pool's; Mike pays weekly. Money uses the confirmed pay line, finished weeks only, ties split the pooled money for the places they cover.
 
 **Top 8 %** is a client-side Monte Carlo (5,000 runs) over the unfinished games. Each game is drawn from ESPN's win probability — the live model during a game, the de-vigged DraftKings moneyline before it, 50/50 if neither exists. Ties for a paid spot share it.
 
@@ -45,7 +46,7 @@ Names appear exactly as in Mike's workbook (everyone in the pool gets it). No em
 
 **`tools/scores.py --season 2026 --week N|latest`** — fetches the ESPN scoreboard and writes the results file. No dependencies. Only rewrites when the games payload changed, so quiet runs leave git clean.
 
-**`tools/check.mjs 2026 N`** — runs the site's own `js/pool.js` under node and prints standings + top-8 odds. Quick sanity check after ingesting.
+**`tools/check.mjs 2026 N`** — runs the site's own `js/pool.js` under node and prints standings + top-8 odds. Quick sanity check after ingesting. **`tools/check.mjs --season 2026`** prints the season table (Crew rows, whole-pool top 12, money by week, and a total-paid check).
 
 **`tools/publish.sh <xlsx> <week>`** — ingest + commit + push in one go.
 
@@ -67,4 +68,5 @@ If Mike re-sends a corrected workbook (happened week 1), just run the same comma
 ```
 python3 -m http.server 8000     # then open http://localhost:8000
 node tools/check.mjs 2026 2
+node tools/check.mjs --season 2026
 ```

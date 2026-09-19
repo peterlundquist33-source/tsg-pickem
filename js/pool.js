@@ -255,5 +255,85 @@
     return { sims: 0, topN: topN, open: 0, by_name: out };
   }
 
-  return { TOP_N: TOP_N, buildWeek: buildWeek, simulate: simulate, settle: settle, gameKey: gameKey };
+  // ---------- season to date ----------
+  // Pay line confirmed by Mike's week 1 results email: places 1..8.
+  var PAYOUTS = [130, 110, 90, 65, 40, 30, 25, 20];
+
+  // Money for one finished week, by name. Entries that share a rank split the
+  // pooled money for the places they cover: two tied for 7th get (25 + 20) / 2.
+  function payouts(standings, payline) {
+    payline = payline || PAYOUTS;
+    var groups = {};
+    standings.forEach(function (e) { (groups[e.rank] = groups[e.rank] || []).push(e); });
+    var out = {};
+    Object.keys(groups).forEach(function (r) {
+      var g = groups[r], first = parseInt(r, 10) - 1, pool = 0;
+      for (var i = 0; i < g.length; i++) pool += payline[first + i] || 0;
+      g.forEach(function (e) { out[e.name] = pool / g.length; });
+    });
+    return out;
+  }
+
+  // Fold weekly models (from buildWeek) into season standings. A finished week
+  // is final and pays; an unfinished week counts its live points, but top-8
+  // finishes, wins and money only accrue once the week is final. Entries
+  // missing from a week's sheet simply don't accrue that week.
+  // Season rank = total points, then top-8 finishes, then best week (assumed:
+  // the pool's official prize is weekly).
+  function buildSeason(models, opts) {
+    opts = opts || {};
+    var topN = opts.topN || TOP_N;
+    var weeks = models.slice().sort(function (a, b) { return a.week - b.week; });
+    var by = {};
+    weeks.forEach(function (m) {
+      var money = m.all_final ? payouts(m.standings, opts.payline) : {};
+      m.standings.forEach(function (e) {
+        var s = by[e.name];
+        if (!s) s = by[e.name] = { name: e.name, weeks: {}, total: 0, live_pts: 0, played: 0, top8: 0, wins: 0, best: null, best_week: null, rank_sum: 0, money: 0 };
+        var top = e.rank <= topN;
+        var w = { week: m.week, pts: e.live, rank: e.rank, tied: e.tied, top8: top, final: m.all_final, money: money[e.name] || 0 };
+        s.weeks[m.week] = w;
+        s.total += e.live; s.played += 1; s.rank_sum += e.rank;
+        if (m.all_final) {
+          if (top) s.top8 += 1;
+          if (e.rank === 1) s.wins += 1;
+          s.money += w.money;
+        } else s.live_pts += e.live;
+        if (s.best == null || e.live > s.best) { s.best = e.live; s.best_week = m.week; }
+      });
+    });
+    var entries = Object.keys(by).map(function (k) {
+      var s = by[k];
+      s.avg_finish = s.played ? s.rank_sum / s.played : null;
+      s.per_week = weeks.map(function (m) { return s.weeks[m.week] || null; });
+      return s;
+    });
+    var standings = entries.sort(function (a, b) {
+      if (b.total !== a.total) return b.total - a.total;
+      if (b.top8 !== a.top8) return b.top8 - a.top8;
+      if ((b.best || 0) !== (a.best || 0)) return (b.best || 0) - (a.best || 0);
+      return a.name.localeCompare(b.name);
+    });
+    var same = function (a, b) { return a.total === b.total && a.top8 === b.top8 && (a.best || 0) === (b.best || 0); };
+    var rank = 0;
+    standings.forEach(function (s, i) {
+      if (!(i > 0 && same(standings[i - 1], s))) rank = i + 1;
+      s.rank = rank;
+    });
+    standings.forEach(function (s, i) {
+      var nb = standings[i - 1], nx = standings[i + 1];
+      s.tied = (nb && nb.rank === s.rank) || (nx && nx.rank === s.rank) || false;
+    });
+    return {
+      season: weeks.length ? weeks[0].season : null,
+      weeks: weeks.map(function (m) {
+        return { week: m.week, final: m.all_final, n_final: m.n_final, n_live: m.n_live, n_games: m.n_games, entries: m.entries.length, fetched_at: m.fetched_at };
+      }),
+      standings: standings,
+      n_final_weeks: weeks.filter(function (m) { return m.all_final; }).length,
+      in_progress: weeks.filter(function (m) { return !m.all_final; }).map(function (m) { return m.week; })
+    };
+  }
+
+  return { TOP_N: TOP_N, PAYOUTS: PAYOUTS, buildWeek: buildWeek, simulate: simulate, settle: settle, gameKey: gameKey, payouts: payouts, buildSeason: buildSeason };
 });

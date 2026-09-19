@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0e1117">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
@@ -19,8 +19,12 @@
       <h1 id="title">Pick'em Tracker</h1>
     </div>
     <div class="controls">
-      <label class="dim" for="week" style="font-size:.75rem">Week</label>
-      <select id="week" aria-label="Week"></select>
+      <div class="tabs" role="tablist" aria-label="View">
+        <button role="tab" id="tab-week" data-view="week" aria-selected="true" aria-controls="view-week">Week</button>
+        <button role="tab" id="tab-season" data-view="season" aria-selected="false" aria-controls="view-season">Season</button>
+      </div>
+      <label class="dim week-ctl" for="week" style="font-size:.75rem">Week</label>
+      <select id="week" class="week-ctl" aria-label="Week"></select>
       <button class="btn" id="refresh" title="Refresh scores" aria-label="Refresh scores">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
       </button>
@@ -34,6 +38,7 @@
 <main class="wrap">
   <div class="status-bar" id="status"><span class="dot"></span> Loading…</div>
 
+  <div id="view-week" role="tabpanel" aria-labelledby="tab-week">
   <section id="six-section">
     <div class="section-head">
       <h2>The Crew</h2>
@@ -66,6 +71,35 @@
       <table class="standings" id="standings"></table>
     </div>
   </section>
+  </div>
+
+  <div id="view-season" role="tabpanel" aria-labelledby="tab-season" hidden>
+  <section id="season-six-section">
+    <div class="section-head">
+      <h2>The Crew · Season</h2>
+      <span class="sub" id="season-six-sub"></span>
+    </div>
+    <div class="six-tiles" id="season-tiles"></div>
+    <div class="card grid-wrap" style="margin-top:8px">
+      <table class="grid season-grid" id="season-grid"></table>
+    </div>
+  </section>
+
+  <section id="season-section">
+    <div class="section-head">
+      <h2>Season standings</h2>
+      <span class="sub" id="season-sub"></span>
+    </div>
+    <p class="note">Season rank is by total points across every week loaded (our own scoreboard — the pool's official prize is the weekly top 8, so this is bragging rights). The current week counts with its live points and is marked in progress; top-8 finishes and money only accrue once a week is final.</p>
+    <div class="toolbar">
+      <input type="search" id="find-season" placeholder="Find a name…" aria-label="Find a name">
+      <span class="legend"><i style="background:var(--gold)"></i>top-8 week &nbsp; <i style="background:var(--accent)"></i>The Crew</span>
+    </div>
+    <div class="card table-wrap">
+      <table class="standings season" id="season-standings"></table>
+    </div>
+  </section>
+  </div>
 
   <div class="notes" id="notes">
     <p>Scores from ESPN, refreshed automatically during games. Picks from the workbook Mike emails after Thursday lockdown. Confused by a number? <a href="#" id="help-link">How does this work</a> · <a href="https://github.com/peterlundquist33-source/tsg-pickem">Source</a>.</p>
@@ -107,6 +141,17 @@
     </ul>
     <p>The <span class="k gold">gold line</span> is the pay line: above it you get paid, below it you don't. Crew members are highlighted in green.</p>
 
+    <h3>Season</h3>
+    <p>The <b>Season</b> tab up top adds every week together. Same scoring as the weekly view, just summed. This is our own leaderboard — Mike's pool pays weekly, so the season rank is bragging rights, not money.</p>
+    <ul>
+      <li><b>Pts</b> — total points across every week loaded. The current week counts with its live points (green dot), so it moves while games are on.</li>
+      <li><b>Wks</b> — weeks you submitted a sheet. Miss a week and it shows a dash; you just don't accrue.</li>
+      <li><b>Top 8 / Wins</b> — how many finished weeks you landed in the pay spots / in first. The week in progress doesn't count until it's final.</li>
+      <li><b>Best</b> — your highest single-week score. <b>Avg fin</b> — your average weekly finish.</li>
+      <li><b>Money</b> — what you've won so far at Mike's pay line ($130 / 110 / 90 / 65 / 40 / 30 / 25 / 20). Finished weeks only. If two people tie for a spot, the money for those places is split evenly.</li>
+    </ul>
+    <p>Season rank is by total points; ties break on top-8 finishes, then best week. The Crew strip shows each person's points and finish every week — <span class="k gold">gold</span> means a top-8 week, dashed means the week is still being played.</p>
+
     <h3>What "Top 8 %" actually means</h3>
     <p>The page plays out the rest of the week 5,000 times. For each unfinished game it uses ESPN's win probability (the live in-game number once a game starts; the betting line before kickoff) to decide who wins, then re-scores everyone and checks who lands in the top 8. Your percentage is how often you made it. So 40% means "in 2,000 of 5,000 pretend weekends, you got paid." Before Sunday it's mostly about how much chalk you took; by Sunday night it's mostly math on the games left. When all games are final it's simply 100% or 0%.</p>
 
@@ -114,7 +159,7 @@
     <ul>
       <li><b>Picks:</b> Mike's system emails the locked workbook Thursday evening. It's loaded onto this site automatically that night.</li>
       <li><b>Scores:</b> pulled straight from ESPN while the page is open, roughly every 45 seconds during games. Tap ↻ to force it.</li>
-      <li><b>Weeks:</b> the dropdown up top lets you look back at any week that's been loaded.</li>
+      <li><b>Weeks:</b> the dropdown up top lets you look back at any week that's been loaded. The Season tab remembers which view you had open last.</li>
     </ul>
 
     <h3>Fine print</h3>
@@ -122,8 +167,8 @@
   </div>
 </dialog>
 
-<script src="js/pool.js?v=1"></script>
+<script src="js/pool.js?v=2"></script>
 <script src="js/espn.js?v=1"></script>
-<script src="js/app.js?v=4"></script>
+<script src="js/app.js?v=5"></script>
 </body>
 </html>
