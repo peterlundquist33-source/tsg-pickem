@@ -12,6 +12,7 @@ Static HTML/CSS/JS on GitHub Pages, no framework, no build step. Python tools in
 - **Games** — each matchup's score/status/kickoff, how much of the pool is on each side with their average confidence, and ESPN's line or live win probability.
 - **Standings** — everyone: rank, points, max, picks left, MNF tiebreaker, top-8 %. Sortable, searchable, gold line under the pay spots.
 - **Season tab** (header toggle, remembered in localStorage) — season-to-date for the whole pool: total points, weeks played, top-8 finishes, weekly wins, best week, average finish, money. The Crew get tiles plus a week-by-week strip (points · finish per week, gold when top-8, dashed while the week is in progress). Every ingested week is loaded and scored with the same `Pool` code as the weekly view; the week open in the Week tab feeds in its live points. Season rank is by total points (tiebreak: top-8 finishes, then best week) — that's our leaderboard, not the pool's; Mike pays weekly. Money uses the confirmed pay line, finished weeks only, ties split the pooled money for the places they cover.
+- **Race to last** (Season tab; there's a punishment) — the Crew bottom-up with gap to the next person and **Last %**, plus a `Last %` column for the whole pool. Client-side Monte Carlo, 3,000 runs: finished-week points + the open week played out from ESPN win probabilities (same draw as the weekly sim) + one bootstrapped score per remaining week through week 18, sampled from every entry's score in every finished week (everyone pooled = equal skill assumed; sharpens as weeks pile up). Ties for last split.
 
 **Top 8 %** is a client-side Monte Carlo (5,000 runs) over the unfinished games. Each game is drawn from ESPN's win probability — the live model during a game, the de-vigged DraftKings moneyline before it, 50/50 if neither exists. Ties for a paid spot share it.
 
@@ -46,7 +47,7 @@ Names appear exactly as in Mike's workbook (everyone in the pool gets it). No em
 
 **`tools/scores.py --season 2026 --week N|latest`** — fetches the ESPN scoreboard and writes the results file. No dependencies. Only rewrites when the games payload changed, so quiet runs leave git clean.
 
-**`tools/check.mjs 2026 N`** — runs the site's own `js/pool.js` under node and prints standings + top-8 odds. Quick sanity check after ingesting. **`tools/check.mjs --season 2026`** prints the season table (Crew rows, whole-pool top 12, money by week, and a total-paid check).
+**`tools/check.mjs 2026 N`** — runs the site's own `js/pool.js` under node and prints standings + top-8 odds. Quick sanity check after ingesting. **`tools/check.mjs --season 2026`** prints the season table (Crew rows, whole-pool top 12, money by week, a total-paid check) and the race to last (Crew P(last) within the Crew and in the pool, pool bottom 5, and a probabilities-sum-to-100% check).
 
 **`tools/publish.sh <xlsx> <week>`** — ingest + commit + push in one go.
 

@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#0e1117">
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -80,6 +80,17 @@
       <span class="sub" id="season-six-sub"></span>
     </div>
     <div class="six-tiles" id="season-tiles"></div>
+    <div class="race" id="race">
+      <div class="section-head" style="margin-top:16px">
+        <h3>Race to last</h3>
+        <span class="sub" id="race-sub"></span>
+      </div>
+      <p class="race-lead" id="race-lead"></p>
+      <div class="card table-wrap">
+        <table class="standings race-table" id="race-table"></table>
+      </div>
+      <p class="note" style="margin-top:8px">Last % = chance of finishing the season last among the Crew (there's a punishment). Assumes everyone's equally likely to score any past weekly score; it'll sharpen as weeks pile up.</p>
+    </div>
     <div class="card grid-wrap" style="margin-top:8px">
       <table class="grid season-grid" id="season-grid"></table>
     </div>
@@ -91,6 +102,7 @@
       <span class="sub" id="season-sub"></span>
     </div>
     <p class="note">Season rank is by total points across every week loaded (our own scoreboard — the pool's official prize is the weekly top 8, so this is bragging rights). The current week counts with its live points and is marked in progress; top-8 finishes and money only accrue once a week is final.</p>
+    <p class="note" id="season-last"></p>
     <div class="toolbar">
       <input type="search" id="find-season" placeholder="Find a name…" aria-label="Find a name">
       <span class="legend"><i style="background:var(--gold)"></i>top-8 week &nbsp; <i style="background:var(--accent)"></i>The Crew</span>
@@ -151,6 +163,7 @@
       <li><b>Money</b> — what you've won so far at Mike's pay line ($130 / 110 / 90 / 65 / 40 / 30 / 25 / 20). Finished weeks only. If two people tie for a spot, the money for those places is split evenly.</li>
     </ul>
     <p>Season rank is by total points; ties break on top-8 finishes, then best week. The Crew strip shows each person's points and finish every week — <span class="k gold">gold</span> means a top-8 week, dashed means the week is still being played.</p>
+    <p><b>Last %</b> — the chance you finish the season in last place (in the Crew's "Race to last", last among the eight of us; in the standings, last in the whole pool). The page plays the rest of the season out 3,000 times: the week in progress game by game from ESPN's win probabilities, and every future week through week 18 by handing each person a random score pulled from everything anybody has scored in a finished week so far. That treats everyone as equally skilled, which is the honest call with a couple of weeks of data — it'll sharpen as the season goes. Ties for last split the blame.</p>
 
     <h3>What "Top 8 %" actually means</h3>
     <p>The page plays out the rest of the week 5,000 times. For each unfinished game it uses ESPN's win probability (the live in-game number once a game starts; the betting line before kickoff) to decide who wins, then re-scores everyone and checks who lands in the top 8. Your percentage is how often you made it. So 40% means "in 2,000 of 5,000 pretend weekends, you got paid." Before Sunday it's mostly about how much chalk you took; by Sunday night it's mostly math on the games left. When all games are final it's simply 100% or 0%.</p>
@@ -167,8 +180,8 @@
   </div>
 </dialog>
 
-<script src="js/pool.js?v=2"></script>
+<script src="js/pool.js?v=3"></script>
 <script src="js/espn.js?v=1"></script>
-<script src="js/app.js?v=5"></script>
+<script src="js/app.js?v=6"></script>
 </body>
 </html>

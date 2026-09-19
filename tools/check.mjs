@@ -60,6 +60,26 @@ function checkSeason(season) {
   const paid = s.standings.reduce((a, e) => a + e.money, 0);
   console.log(`total paid = ${money(paid)} (should be ${money(Pool.PAYOUTS.reduce((a, b) => a + b, 0) * s.n_final_weeks)} = ${s.n_final_weeks} final week(s) × $${Pool.PAYOUTS.reduce((a, b) => a + b, 0)})`);
   console.log("* = week in progress, live points");
+
+  // race to last: season Monte Carlo
+  const t0 = Date.now();
+  const sim = Pool.simulateSeason(s, models, { sims: 3000, group: SIX });
+  const ms = Date.now() - t0;
+  const pc = (p) => (p == null ? "–" : p > 0 && p < 0.005 ? "<1%" : Math.round(p * 100) + "%");
+  console.log(`--- race to last: ${sim.sims} sims in ${ms}ms; ${sim.open_weeks} week(s) open, ${sim.future_weeks} future week(s) bootstrapped from ${sim.sample} finished-week scores`);
+  const crew = s.standings.filter((e) => SIX.includes(e.name)).sort((a, b) => a.total - b.total || a.name.localeCompare(b.name));
+  console.log(`  ${"name".padEnd(20)} total   gap  P(last, Crew)  P(last, pool)  exp total`);
+  crew.forEach((e, i) => {
+    const above = crew[i + 1];
+    const b = sim.by_name[e.name];
+    console.log(`  ${e.name.padEnd(20)} ${String(e.total).padStart(5)} ${above ? String(above.total - e.total).padStart(5) : "    –"}  ${pc(b.last_group).padStart(13)}  ${pc(b.last).padStart(13)}  ${b.exp_total.toFixed(0).padStart(9)}`);
+  });
+  const bottom = s.standings.slice().sort((a, b) => a.total - b.total || a.name.localeCompare(b.name));
+  console.log("--- whole pool, bottom 5");
+  bottom.slice(0, 5).forEach((e, i) => console.log(`  ${e.name.padEnd(20)} ${String(e.total).padStart(5)}  wks ${e.played}  P(last) ${pc(sim.by_name[e.name].last)}`));
+  const sumCrew = crew.reduce((a, e) => a + sim.by_name[e.name].last_group, 0);
+  const sumPool = s.standings.reduce((a, e) => a + sim.by_name[e.name].last, 0);
+  console.log(`sum P(last, Crew) = ${(sumCrew * 100).toFixed(1)}% (should be 100%); sum P(last, pool) = ${(sumPool * 100).toFixed(1)}% (should be 100%)`);
 }
 
 const args = process.argv.slice(2);

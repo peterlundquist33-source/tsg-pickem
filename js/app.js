@@ -8,6 +8,7 @@
   var SIX = ["Peter Lundquist", "Christian Massett", "Mitch Max", "Noah Thesing", "Logan Rezac", "Sam DuBois", "CJ Woda", "Logan Gacke"];
   var ME = "Peter Lundquist";
   var SIMS = 5000;
+  var SEASON_SIMS = 3000;              // race-to-last Monte Carlo
   var VIEW_KEY = "tsg.view";           // localStorage: last tab ("week" | "season")
   var SEASON_TTL = 60e3;               // re-read the committed season files at most this often
 
@@ -19,7 +20,7 @@
     sort: { key: "rank", dir: 1 }, filter: "",
     timer: null, loading: false,
     view: "week",
-    seasonDocs: null, seasonModel: null, seasonLoading: false,
+    seasonDocs: null, seasonModel: null, seasonSim: null, seasonLoading: false,
     seasonSort: { key: "rank", dir: 1 }
   };
 
@@ -32,6 +33,11 @@
   function pct(x, d) { return x == null ? "–" : (x * 100).toFixed(d == null ? 0 : d) + "%"; }
   function ordinal(n) { var v = n % 100, t = ["th", "st", "nd", "rd"]; return n + (t[(v - 20) % 10] || t[v] || t[0]); }
   function money(x) { return "$" + (x % 1 ? x.toFixed(2) : x); }
+  // whole percents; a nonzero chance never rounds to "0%"
+  function pctWhole(p) { return p == null ? "–" : p > 0 && p < 0.005 ? "<1%" : Math.round(p * 100) + "%"; }
+  function joinNames(list) {
+    return list.length <= 1 ? list.join("") : list.slice(0, -1).join(", ") + " and " + list[list.length - 1];
+  }
   // Short label for a Crew member: first name, plus last initial when two share a first name (the Logans).
   function firstName(n) {
     var parts = String(n).trim().split(/\s+/), first = parts[0];
@@ -115,7 +121,13 @@
       return Pool.buildWeek(d.weekDoc, d.resultsDoc);
     });
     state.seasonModel = Pool.buildSeason(models);
+    state.seasonSim = Pool.simulateSeason(state.seasonModel, models, { sims: SEASON_SIMS, seed: 20260919, group: SIX });
     if (state.view === "season") renderSeason();
+  }
+
+  function seasonSimFor(name) {
+    var s = state.seasonSim && state.seasonSim.by_name[name];
+    return s || { last: null, last_group: null, exp_total: null };
   }
 
   function setView(view) {
@@ -417,7 +429,48 @@
     renderHeader();
     renderSeasonStatus();
     renderSeasonSix();
+    renderRace();
     renderSeasonTable();
+  }
+
+  // Crew, bottom up: who's in the lead for last and everyone's chance of ending there.
+  function renderRace() {
+    var s = state.seasonModel, sim = state.seasonSim;
+    var byName = {};
+    s.standings.forEach(function (e) { byName[norm(e.name)] = e; });
+    var crew = SIX.map(function (n) { return byName[norm(n)]; }).filter(Boolean)
+      .sort(function (a, b) { return a.total - b.total || a.name.localeCompare(b.name); });
+    if (!crew.length) { $("race-lead").textContent = ""; $("race-table").innerHTML = ""; $("race-sub").textContent = ""; return; }
+
+    var low = crew[0].total;
+    var bottom = crew.filter(function (e) { return e.total === low; });
+    var next = crew.filter(function (e) { return e.total > low; })[0];
+    var lead;
+    if (bottom.length === 1) lead = "<b>" + esc(firstName(bottom[0].name)) + "</b> is in the lead for last";
+    else lead = "<b>" + esc(joinNames(bottom.map(function (e) { return firstName(e.name); }))) + "</b> are tied in the lead for last";
+    if (next) lead += ", " + (next.total - low) + " back of " + esc(firstName(next.name));
+    lead += ".";
+    var fav = crew.slice().sort(function (a, b) { return (seasonSimFor(b.name).last_group || 0) - (seasonSimFor(a.name).last_group || 0); })[0];
+    var favP = seasonSimFor(fav.name).last_group;
+    if (favP != null && bottom.indexOf(fav) < 0) lead += " The sim actually likes <b>" + esc(firstName(fav.name)) + "</b> for it (" + pctWhole(favP) + ").";
+    $("race-lead").innerHTML = lead;
+    $("race-sub").textContent = sim ? sim.sims.toLocaleString() + " sims · " + sim.future_weeks + " week" + (sim.future_weeks === 1 ? "" : "s") + " to play" : "";
+
+    var head = "<thead><tr><th>Name</th><th class=\"num\" title=\"Season points so far\">Pts</th><th class=\"num\" title=\"Points behind the next person up\">Gap</th><th class=\"num\" title=\"Chance of finishing last among the Crew\">Last %</th></tr></thead>";
+    var body = "<tbody>" + crew.map(function (e, i) {
+      var above = crew[i + 1];
+      var p = seasonSimFor(e.name).last_group;
+      var cls = ["six"];
+      if (e.total === low) cls.push("last");
+      if (isMe(e.name)) cls.push("me");
+      return '<tr class="' + cls.join(" ") + '">' +
+        '<td class="name">' + esc(firstName(e.name)) + "</td>" +
+        '<td class="num">' + e.total + (e.live_pts ? '<span class="live-dot" title="includes ' + e.live_pts + ' live pts"></span>' : "") + "</td>" +
+        '<td class="num">' + (above ? (above.total - e.total || '<span class="dim">tied</span>') : '<span class="dim">–</span>') + "</td>" +
+        '<td class="num">' + pctWhole(p) + (p != null ? '<span class="mini-bar neg"><i style="width:' + Math.round(p * 100) + '%"></i></span>' : "") + "</td>" +
+        "</tr>";
+    }).join("") + "</tbody>";
+    $("race-table").innerHTML = head + body;
   }
 
   function renderSeasonStatus() {
@@ -492,14 +545,17 @@
     { key: "wins", label: "Wins", num: true, title: "Weekly wins (finished weeks only)" },
     { key: "best", label: "Best", num: true, title: "Best single week" },
     { key: "avg_finish", label: "Avg fin", num: true, title: "Average weekly finish" },
-    { key: "money", label: "Money", num: true, title: "Cumulative payouts, finished weeks only; ties split the pooled money" }
+    { key: "money", label: "Money", num: true, title: "Cumulative payouts, finished weeks only; ties split the pooled money" },
+    { key: "last", label: "Last %", num: true, title: "Chance of finishing the season last in the whole pool" }
   ];
 
   function renderSeasonTable() {
     var s = state.seasonModel;
     var sk = state.seasonSort.key, dir = state.seasonSort.dir;
+    var lastP = {};
+    s.standings.forEach(function (e) { lastP[e.name] = seasonSimFor(e.name).last; });
     var rows = s.standings.slice().sort(function (a, b) {
-      var av = a[sk], bv = b[sk];
+      var av = sk === "last" ? lastP[a.name] : a[sk], bv = sk === "last" ? lastP[b.name] : b[sk];
       if (av == null && bv == null) return a.rank - b.rank;
       if (av == null) return 1; if (bv == null) return -1;
       if (typeof av === "string") return dir * av.localeCompare(bv);
@@ -512,13 +568,34 @@
       return '<th data-key="' + c.key + '"' + (c.num ? ' class="num"' : "") + ' aria-sort="' + sort + '"' + (c.title ? ' title="' + esc(c.title) + '"' : "") + ">" + esc(c.label) + "</th>";
     }).join("") + "</tr></thead>";
 
+    // who holds last overall right now (lowest total; skipped weeks just mean fewer points)
+    var low = Infinity;
+    s.standings.forEach(function (e) { if (e.total < low) low = e.total; });
+    var bottom = s.standings.filter(function (e) { return e.total === low; });
+    var next = s.standings.filter(function (e) { return e.total > low; }).sort(function (a, b) { return a.total - b.total; })[0];
+    if (bottom.length) {
+      var names = joinNames(bottom.map(function (e) { return e.name; }));
+      var fav = s.standings.slice().sort(function (a, b) { return (lastP[b.name] || 0) - (lastP[a.name] || 0); })[0];
+      var favNote = fav && lastP[fav.name] != null && bottom.indexOf(fav) < 0
+        ? " The sim's favourite is <b class=\"neg\">" + esc(fav.name) + "</b> at " + pctWhole(lastP[fav.name]) +
+          (fav.played < fav.per_week.length ? " (missed a week)" : "") + "."
+        : "";
+      $("season-last").innerHTML = "Last overall right now: <b class=\"neg\">" + esc(names) + "</b> (" + low + " pts" +
+        (next ? ", " + (next.total - low) + " back of " + esc(next.name) : "") + ")" +
+        (bottom.length === 1 && lastP[bottom[0].name] != null ? " · " + pctWhole(lastP[bottom[0].name]) + " to finish last" : "") +
+        "." + favNote + " Last % assumes everyone's equally likely to score any past weekly score.";
+    } else $("season-last").textContent = "";
+
     var f = norm(state.filter);
     var body = "<tbody>" + rows.map(function (e) {
       var cls = [];
       if (isSix(e.name)) cls.push("six");
       if (isMe(e.name)) cls.push("me");
+      if (e.total === low) cls.push("pool-last");
       if (f && norm(e.name).indexOf(f) < 0) cls.push("hidden");
       var liveDot = e.live_pts ? '<span class="live-dot" title="includes ' + e.live_pts + ' pts from the week in progress"></span>' : "";
+      var p = lastP[e.name];
+      var lastCell = pctWhole(p) + (p != null ? '<span class="mini-bar neg"><i style="width:' + Math.round(p * 100) + '%"></i></span>' : "");
       var missed = e.per_week.some(function (w) { return !w; });
       return '<tr class="' + cls.join(" ") + '">' +
         '<td class="rank' + (e.tied ? " tie" : "") + '">' + e.rank + "</td>" +
@@ -530,6 +607,7 @@
         '<td class="num">' + (e.best == null ? "–" : e.best + ' <span class="dim">W' + e.best_week + "</span>") + "</td>" +
         '<td class="num">' + (e.avg_finish == null ? "–" : e.avg_finish.toFixed(1)) + "</td>" +
         '<td class="num">' + (e.money ? money(e.money) : '<span class="dim">$0</span>') + "</td>" +
+        '<td class="num">' + lastCell + "</td>" +
         "</tr>";
     }).join("") + "</tbody>";
     $("season-standings").innerHTML = head + body;

@@ -199,6 +199,18 @@ table.season-grid th:first-child, table.season-grid td:first-child { min-width: 
 table.grid tfoot .gold { color: var(--gold); }
 .tile .row b.gold { color: var(--gold); }
 
+/* ---------- The Crew: race to last ---------- */
+.race h3 { font-size: var(--fs-16); }
+.race-lead { font-size: var(--fs-14); color: var(--text-2); margin-bottom: var(--s-2); }
+.race-lead b { color: var(--neg); font-weight: 600; }
+table.race-table tr.last td { background: var(--neg-tint); }
+table.race-table tr.last td.name { color: var(--neg); }
+table.race-table tr.last td.name::before { content: "▼ "; font-size: var(--fs-11); }
+table.race-table tr.six td.name { color: var(--text); font-weight: 500; }
+table.race-table tr.last.six td.name { color: var(--neg); font-weight: 600; }
+.mini-bar.neg i { background: var(--neg); }
+table.standings tr.pool-last td:first-child { color: var(--neg); font-weight: 700; }
+
 /* ---------- game strip ---------- */
 .games {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--s-2);

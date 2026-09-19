@@ -335,5 +335,93 @@
     };
   }
 
-  return { TOP_N: TOP_N, PAYOUTS: PAYOUTS, buildWeek: buildWeek, simulate: simulate, settle: settle, gameKey: gameKey, payouts: payouts, buildSeason: buildSeason };
+  // ---------- season Monte Carlo: who finishes last ----------
+  // Regular season length; future weeks are (REG_SEASON_WEEKS - latest loaded week).
+  var REG_SEASON_WEEKS = 18;
+
+  // Each run: season total = finished-week points
+  //   + the in-progress week(s) played out game by game from ESPN win probability
+  //     (same draw as simulate(): live model in-game, moneyline before, 50/50 if none)
+  //   + one bootstrapped score per future week, drawn from every entry's score in
+  //     every finished week (everyone pooled, i.e. equal skill assumed).
+  // Last place = lowest total; ties split. opts.group names get a second number:
+  // chance of finishing last within that group.
+  function simulateSeason(season, models, opts) {
+    opts = opts || {};
+    var sims = opts.sims || 3000;
+    var rand = mulberry32(opts.seed || 20260919);
+    var totalWeeks = opts.totalWeeks || REG_SEASON_WEEKS;
+    var names = season.standings.map(function (e) { return e.name; }), n = names.length;
+    var idx = {};
+    names.forEach(function (nm, i) { idx[nm] = i; });
+
+    var banked = new Float64Array(n);
+    season.standings.forEach(function (e, i) {
+      e.per_week.forEach(function (w) { if (w && w.final) banked[i] += w.pts; });
+    });
+
+    var pool = [];
+    models.forEach(function (m) { if (m.all_final) m.entries.forEach(function (e) { pool.push(e.live); }); });
+
+    var lastWeek = 0;
+    models.forEach(function (m) { if (m.week > lastWeek) lastWeek = m.week; });
+    var future = Math.max(0, totalWeeks - lastWeek);
+
+    var openWeeks = models.filter(function (m) { return !m.all_final; }).map(function (m) {
+      var open = m.games.filter(function (g) { return !g.completed; });
+      var pHome = new Float64Array(open.length);
+      open.forEach(function (g, j) { pHome[j] = g.home_win_prob == null ? 0.5 : g.home_win_prob; });
+      var rows = m.entries.filter(function (e) { return idx[e.name] != null; }).map(function (e) {
+        var s = [];
+        open.forEach(function (g, j) {
+          var pick = e.picks[g.idx], pts = e.points[g.idx] || 0;
+          if (pick === g.home) s.push([j, pts, 1]);
+          else if (pick === g.away) s.push([j, pts, 0]);
+        });
+        return { i: idx[e.name], banked: e.banked, stake: s };
+      });
+      return { pHome: pHome, rows: rows, outcome: new Uint8Array(open.length) };
+    });
+
+    var group = (opts.group || []).map(function (nm) { return idx[nm]; }).filter(function (i) { return i != null; });
+    var totals = new Float64Array(n);
+    var last = new Float64Array(n), lastGroup = new Float64Array(n), sumTotal = new Float64Array(n);
+    var i, k, w, r, s;
+
+    for (s = 0; s < sims; s++) {
+      totals.set(banked);
+      for (w = 0; w < openWeeks.length; w++) {
+        var ow = openWeeks[w];
+        for (k = 0; k < ow.pHome.length; k++) ow.outcome[k] = rand() < ow.pHome[k] ? 1 : 0;
+        for (r = 0; r < ow.rows.length; r++) {
+          var row = ow.rows[r], t = row.banked, st = row.stake;
+          for (k = 0; k < st.length; k++) if (ow.outcome[st[k][0]] === st[k][2]) t += st[k][1];
+          totals[row.i] += t;
+        }
+      }
+      if (future && pool.length) {
+        for (i = 0; i < n; i++) for (k = 0; k < future; k++) totals[i] += pool[(rand() * pool.length) | 0];
+      }
+      var min = Infinity, cnt = 0;
+      for (i = 0; i < n; i++) { sumTotal[i] += totals[i]; if (totals[i] < min) { min = totals[i]; cnt = 1; } else if (totals[i] === min) cnt++; }
+      for (i = 0; i < n; i++) if (totals[i] === min) last[i] += 1 / cnt;
+      if (group.length) {
+        var gmin = Infinity, gcnt = 0;
+        for (k = 0; k < group.length; k++) { var v = totals[group[k]]; if (v < gmin) { gmin = v; gcnt = 1; } else if (v === gmin) gcnt++; }
+        for (k = 0; k < group.length; k++) if (totals[group[k]] === gmin) lastGroup[group[k]] += 1 / gcnt;
+      }
+    }
+
+    var out = {};
+    names.forEach(function (nm, j) {
+      out[nm] = { last: last[j] / sims, last_group: group.indexOf(j) >= 0 ? lastGroup[j] / sims : null, exp_total: sumTotal[j] / sims };
+    });
+    return { sims: sims, future_weeks: future, open_weeks: openWeeks.length, sample: pool.length, total_weeks: totalWeeks, by_name: out };
+  }
+
+  return {
+    TOP_N: TOP_N, PAYOUTS: PAYOUTS, REG_SEASON_WEEKS: REG_SEASON_WEEKS,
+    buildWeek: buildWeek, simulate: simulate, settle: settle, gameKey: gameKey,
+    payouts: payouts, buildSeason: buildSeason, simulateSeason: simulateSeason
+  };
 });
