@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-19T12:14:23Z",
+ "fetched_at": "2026-09-19T14:11:15Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -347,14 +347,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.863,
+   "home_win_prob": 0.8677,
    "prob_source": "moneyline",
    "odds": {
     "details": "SF -13.5",
     "spread_home": -13.5,
     "over_under": 44.5,
-    "moneyline_home": "-900",
-    "moneyline_away": "+600",
+    "moneyline_home": "-950",
+    "moneyline_away": "+625",
     "provider": "DraftKings"
    }
   },
@@ -437,14 +437,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.7095,
+   "home_win_prob": 0.705,
    "prob_source": "moneyline",
    "odds": {
-    "details": "KC -6.5",
-    "spread_home": -6.5,
+    "details": "KC -6",
+    "spread_home": -6,
     "over_under": 46.5,
-    "moneyline_home": "-285",
-    "moneyline_away": "+230",
+    "moneyline_home": "-278",
+    "moneyline_away": "+225",
     "provider": "DraftKings"
    }
   },
@@ -467,14 +467,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.7508,
+   "home_win_prob": 0.7478,
    "prob_source": "moneyline",
    "odds": {
     "details": "LAR -7",
     "spread_home": -7,
     "over_under": 48.5,
-    "moneyline_home": "-360",
-    "moneyline_away": "+285",
+    "moneyline_home": "-355",
+    "moneyline_away": "+280",
     "provider": "DraftKings"
    }
   }
