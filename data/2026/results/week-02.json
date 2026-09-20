@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-20T20:23:21Z",
+ "fetched_at": "2026-09-20T20:37:04Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -109,14 +109,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "End of 4th Quarter",
-   "short_detail": "End of 4th",
-   "period": 4,
-   "clock": "0:00",
+   "detail": "6:55 - OT",
+   "short_detail": "6:55 - OT",
+   "period": 5,
+   "clock": "6:55",
    "away_score": 17,
    "home_score": 17,
    "winner": null,
-   "home_win_prob": 0.5013,
+   "home_win_prob": 0.3652,
    "prob_source": "live",
    "odds": null
   },
@@ -224,14 +224,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "7:10 - 1st Quarter",
-   "short_detail": "7:10 - 1st",
+   "detail": "4:10 - 1st Quarter",
+   "short_detail": "4:10 - 1st",
    "period": 1,
-   "clock": "7:10",
+   "clock": "4:10",
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3343,
+   "home_win_prob": 0.3692,
    "prob_source": "live",
    "odds": null
   },
@@ -247,14 +247,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "8:12 - 1st Quarter",
-   "short_detail": "8:12 - 1st",
+   "detail": "4:04 - 1st Quarter",
+   "short_detail": "4:04 - 1st",
    "period": 1,
-   "clock": "8:12",
+   "clock": "4:04",
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6675,
+   "home_win_prob": 0.6901,
    "prob_source": "live",
    "odds": null
   },
@@ -268,25 +268,18 @@
    "home_name": "San Francisco 49ers",
    "kickoff": "2026-09-20T20:25Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, September 20th at 4:25 PM EDT",
-   "short_detail": "9/20 - 4:25 PM EDT",
-   "period": 0,
-   "clock": "0:00",
+   "detail": "10:28 - 1st Quarter",
+   "short_detail": "10:28 - 1st",
+   "period": 1,
+   "clock": "10:28",
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.8579,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "SF -12.5",
-    "spread_home": -12.5,
-    "over_under": 44.5,
-    "moneyline_home": "-850",
-    "moneyline_away": "+575",
-    "provider": "DraftKings"
-   }
+   "home_win_prob": 0.9136,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401872943",
@@ -298,25 +291,18 @@
    "home_name": "Arizona Cardinals",
    "kickoff": "2026-09-20T20:25Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, September 20th at 4:25 PM EDT",
-   "short_detail": "9/20 - 4:25 PM EDT",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
+   "detail": "12:25 - 1st Quarter",
+   "short_detail": "12:25 - 1st",
+   "period": 1,
+   "clock": "12:25",
+   "away_score": 7,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3425,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "SEA -3.5",
-    "spread_home": 3.5,
-    "over_under": 40.5,
-    "moneyline_home": "+180",
-    "moneyline_away": "-218",
-    "provider": "DraftKings"
-   }
+   "home_win_prob": 0.3855,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401872944",
@@ -328,25 +314,18 @@
    "home_name": "Dallas Cowboys",
    "kickoff": "2026-09-20T20:25Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, September 20th at 4:25 PM EDT",
-   "short_detail": "9/20 - 4:25 PM EDT",
-   "period": 0,
-   "clock": "0:00",
+   "detail": "10:01 - 1st Quarter",
+   "short_detail": "10:01 - 1st",
+   "period": 1,
+   "clock": "10:01",
    "away_score": 0,
-   "home_score": 0,
+   "home_score": 7,
    "winner": null,
-   "home_win_prob": 0.6636,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "DAL -3.5",
-    "spread_home": -3.5,
-    "over_under": 51.5,
-    "moneyline_home": "-225",
-    "moneyline_away": "+185",
-    "provider": "DraftKings"
-   }
+   "home_win_prob": null,
+   "prob_source": null,
+   "odds": null
   },
   {
    "espn_id": "401872945",
@@ -375,7 +354,7 @@
     "over_under": 46.5,
     "moneyline_home": "-265",
     "moneyline_away": "+215",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -405,7 +384,7 @@
     "over_under": 47.5,
     "moneyline_home": "-285",
     "moneyline_away": "+230",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   }
  ]
