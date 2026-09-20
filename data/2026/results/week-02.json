@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-20T23:21:07Z",
+ "fetched_at": "2026-09-20T23:35:10Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -291,17 +291,17 @@
    "home_name": "Arizona Cardinals",
    "kickoff": "2026-09-20T20:25Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "1:11 - 4th Quarter",
-   "short_detail": "1:11 - 4th",
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
    "period": 4,
-   "clock": "1:11",
+   "clock": "0:00",
    "away_score": 31,
    "home_score": 7,
-   "winner": null,
-   "home_win_prob": 0.001,
-   "prob_source": "live",
+   "winner": "SEA",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -316,14 +316,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "5:40 - 4th Quarter",
-   "short_detail": "5:40 - 4th",
+   "detail": "2:00 - 4th Quarter",
+   "short_detail": "2:00 - 4th",
    "period": 4,
-   "clock": "5:40",
+   "clock": "2:00",
    "away_score": 20,
-   "home_score": 30,
+   "home_score": 37,
    "winner": null,
-   "home_win_prob": 0.9883,
+   "home_win_prob": 0.999,
    "prob_source": "live",
    "odds": null
   },
@@ -354,7 +354,7 @@
     "over_under": 46.5,
     "moneyline_home": "-265",
     "moneyline_away": "+215",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -384,7 +384,7 @@
     "over_under": 47.5,
     "moneyline_home": "-285",
     "moneyline_away": "+230",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
