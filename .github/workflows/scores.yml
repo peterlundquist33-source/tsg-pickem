@@ -9,7 +9,7 @@ on:
     - cron: "*/10 13-23 * 9-12,1 0"  # Sunday     (13:00–23:59 UTC; London games onward)
     - cron: "*/10 0-5 * 9-12,1 1"    # Sun night  (Mon 00:00–05:59 UTC)
     - cron: "*/10 0-5 * 9-12,1 2"    # Mon night  (Tue 00:00–05:59 UTC)
-    - cron: "0 * * 9-12,1 *"         # hourly sweep
+    - cron: "5 * * 9-12,1 *"         # hourly sweep (:05 so it never lands on a */10 tick)
   workflow_dispatch:
     inputs:
       season:
@@ -36,21 +36,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Fetch scores
+      - name: Fetch scores, commit & push (retry on race)
+        env:
+          SEASON: ${{ github.event.inputs.season || '2026' }}
+          WEEK: ${{ github.event.inputs.week || 'latest' }}
         run: |
-          python3 tools/scores.py \
-            --season "${{ github.event.inputs.season || '2026' }}" \
-            --week "${{ github.event.inputs.week || 'latest' }}"
-
-      - name: Commit & push if changed
-        run: |
-          if [ -n "$(git status --porcelain data)" ]; then
-            git config user.name  "tsg-pickem-bot"
-            git config user.email "actions@users.noreply.github.com"
+          git config user.name  "tsg-pickem-bot"
+          git config user.email "actions@users.noreply.github.com"
+          # Two runs can overlap (cron jitter, dispatch during a window). Instead of
+          # rebasing a regenerated JSON file onto a newer one, start from origin/main
+          # and regenerate; the fetch is the source of truth, so nothing is lost.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            python3 tools/scores.py --season "$SEASON" --week "$WEEK"
+            if [ -z "$(git status --porcelain data)" ]; then echo "no changes"; exit 0; fi
             git add data
             git commit -m "scores $(date -u +'%Y-%m-%d %H:%M') UTC"
-            git pull --rebase
-            git push
-          else
-            echo "no changes"
-          fi
+            if git push origin HEAD:main; then exit 0; fi
+            echo "push rejected (attempt $attempt), retrying"
+            sleep $((attempt * 5))
+          done
+          echo "gave up after 3 attempts"; exit 1
