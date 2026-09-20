@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-20T22:55:57Z",
+ "fetched_at": "2026-09-20T23:08:12Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -222,17 +222,17 @@
    "home_name": "Denver Broncos",
    "kickoff": "2026-09-20T20:05Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "3:19 - 4th Quarter",
-   "short_detail": "3:19 - 4th",
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
    "period": 4,
-   "clock": "3:19",
+   "clock": "0:00",
    "away_score": 13,
    "home_score": 20,
-   "winner": null,
-   "home_win_prob": 0.9916,
-   "prob_source": "live",
+   "winner": "DEN",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -247,14 +247,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "3:03 - 4th Quarter",
-   "short_detail": "3:03 - 4th",
+   "detail": "1:52 - 4th Quarter",
+   "short_detail": "1:52 - 4th",
    "period": 4,
-   "clock": "3:03",
-   "away_score": 17,
+   "clock": "1:52",
+   "away_score": 24,
    "home_score": 14,
    "winner": null,
-   "home_win_prob": 0.1286,
+   "home_win_prob": 0.001,
    "prob_source": "live",
    "odds": null
   },
@@ -270,15 +270,15 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "7:53 - 4th Quarter",
-   "short_detail": "7:53 - 4th",
+   "detail": "2:30 - 4th Quarter",
+   "short_detail": "2:30 - 4th",
    "period": 4,
-   "clock": "7:53",
-   "away_score": 6,
+   "clock": "2:30",
+   "away_score": 12,
    "home_score": 35,
    "winner": null,
-   "home_win_prob": 0.999,
-   "prob_source": "live",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -293,14 +293,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "12:40 - 4th Quarter",
-   "short_detail": "12:40 - 4th",
+   "detail": "5:34 - 4th Quarter",
+   "short_detail": "5:34 - 4th",
    "period": 4,
-   "clock": "12:40",
+   "clock": "5:34",
    "away_score": 24,
    "home_score": 7,
    "winner": null,
-   "home_win_prob": 0.0229,
+   "home_win_prob": 0.001,
    "prob_source": "live",
    "odds": null
   },
@@ -316,14 +316,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "15:00 - 4th Quarter",
-   "short_detail": "15:00 - 4th",
+   "detail": "10:54 - 4th Quarter",
+   "short_detail": "10:54 - 4th",
    "period": 4,
-   "clock": "15:00",
+   "clock": "10:54",
    "away_score": 13,
-   "home_score": 27,
+   "home_score": 30,
    "winner": null,
-   "home_win_prob": 0.972,
+   "home_win_prob": 0.9811,
    "prob_source": "live",
    "odds": null
   },
@@ -354,7 +354,7 @@
     "over_under": 46.5,
     "moneyline_home": "-265",
     "moneyline_away": "+215",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -384,7 +384,7 @@
     "over_under": 47.5,
     "moneyline_home": "-285",
     "moneyline_away": "+230",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
