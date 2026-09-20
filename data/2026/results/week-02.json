@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-20T19:28:29Z",
+ "fetched_at": "2026-09-20T19:38:19Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -40,14 +40,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "2:58 - 3rd Quarter",
-   "short_detail": "2:58 - 3rd",
-   "period": 3,
-   "clock": "2:58",
+   "detail": "15:00 - 4th Quarter",
+   "short_detail": "15:00 - 4th",
+   "period": 4,
+   "clock": "15:00",
    "away_score": 34,
    "home_score": 3,
    "winner": null,
-   "home_win_prob": 0.0014,
+   "home_win_prob": 0.001,
    "prob_source": "live",
    "odds": null
   },
@@ -63,14 +63,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "0:35 - 3rd Quarter",
-   "short_detail": "0:35 - 3rd",
-   "period": 3,
-   "clock": "0:35",
+   "detail": "13:03 - 4th Quarter",
+   "short_detail": "13:03 - 4th",
+   "period": 4,
+   "clock": "13:03",
    "away_score": 17,
    "home_score": 6,
    "winner": null,
-   "home_win_prob": 0.1065,
+   "home_win_prob": 0.0763,
    "prob_source": "live",
    "odds": null
   },
@@ -86,14 +86,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "14:48 - 4th Quarter",
-   "short_detail": "14:48 - 4th",
+   "detail": "12:44 - 4th Quarter",
+   "short_detail": "12:44 - 4th",
    "period": 4,
-   "clock": "14:48",
+   "clock": "12:44",
    "away_score": 16,
    "home_score": 16,
    "winner": null,
-   "home_win_prob": 0.6076,
+   "home_win_prob": 0.6881,
    "prob_source": "live",
    "odds": null
   },
@@ -109,14 +109,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "0:04 - 3rd Quarter",
-   "short_detail": "0:04 - 3rd",
-   "period": 3,
-   "clock": "0:04",
+   "detail": "13:26 - 4th Quarter",
+   "short_detail": "13:26 - 4th",
+   "period": 4,
+   "clock": "13:26",
    "away_score": 7,
    "home_score": 14,
    "winner": null,
-   "home_win_prob": 0.7025,
+   "home_win_prob": 0.7367,
    "prob_source": "live",
    "odds": null
   },
@@ -132,14 +132,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "12:58 - 4th Quarter",
-   "short_detail": "12:58 - 4th",
+   "detail": "7:42 - 4th Quarter",
+   "short_detail": "7:42 - 4th",
    "period": 4,
-   "clock": "12:58",
+   "clock": "7:42",
    "away_score": 6,
    "home_score": 3,
    "winner": null,
-   "home_win_prob": 0.4902,
+   "home_win_prob": 0.6688,
    "prob_source": "live",
    "odds": null
   },
@@ -155,14 +155,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "8:06 - 4th Quarter",
-   "short_detail": "8:06 - 4th",
+   "detail": "4:55 - 4th Quarter",
+   "short_detail": "4:55 - 4th",
    "period": 4,
-   "clock": "8:06",
+   "clock": "4:55",
    "away_score": 17,
    "home_score": 17,
    "winner": null,
-   "home_win_prob": 0.5566,
+   "home_win_prob": 0.4092,
    "prob_source": "live",
    "odds": null
   },
@@ -178,14 +178,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "6:08 - 4th Quarter",
-   "short_detail": "6:08 - 4th",
+   "detail": "6:00 - 4th Quarter",
+   "short_detail": "6:00 - 4th",
    "period": 4,
-   "clock": "6:08",
+   "clock": "6:00",
    "away_score": 17,
    "home_score": 17,
    "winner": null,
-   "home_win_prob": 0.3977,
+   "home_win_prob": 0.4374,
    "prob_source": "live",
    "odds": null
   },
@@ -201,14 +201,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "13:37 - 4th Quarter",
-   "short_detail": "13:37 - 4th",
+   "detail": "12:03 - 4th Quarter",
+   "short_detail": "12:03 - 4th",
    "period": 4,
-   "clock": "13:37",
+   "clock": "12:03",
    "away_score": 3,
    "home_score": 20,
    "winner": null,
-   "home_win_prob": 0.9805,
+   "home_win_prob": 0.9888,
    "prob_source": "live",
    "odds": null
   },
@@ -239,7 +239,7 @@
     "over_under": 45.5,
     "moneyline_home": "-148",
     "moneyline_away": "+124",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -269,7 +269,7 @@
     "over_under": 43.5,
     "moneyline_home": "-325",
     "moneyline_away": "+260",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -299,7 +299,7 @@
     "over_under": 44.5,
     "moneyline_home": "-900",
     "moneyline_away": "+600",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -329,7 +329,7 @@
     "over_under": 40.5,
     "moneyline_home": "+180",
     "moneyline_away": "-218",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -359,7 +359,7 @@
     "over_under": 51.5,
     "moneyline_home": "-205",
     "moneyline_away": "+170",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -389,7 +389,7 @@
     "over_under": 46.5,
     "moneyline_home": "-265",
     "moneyline_away": "+215",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -419,7 +419,7 @@
     "over_under": 47.5,
     "moneyline_home": "-285",
     "moneyline_away": "+230",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
