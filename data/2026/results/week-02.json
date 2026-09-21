@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-21T03:42:04Z",
+ "fetched_at": "2026-09-21T03:57:11Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -337,17 +337,17 @@
    "home_name": "Kansas City Chiefs",
    "kickoff": "2026-09-21T00:20Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "5:04 - OT",
-   "short_detail": "5:04 - OT",
+   "status": "post",
+   "completed": true,
+   "detail": "Final/OT",
+   "short_detail": "Final/OT",
    "period": 5,
-   "clock": "5:04",
-   "away_score": 27,
-   "home_score": 30,
-   "winner": null,
-   "home_win_prob": 0.3517,
-   "prob_source": "live",
+   "clock": "0:00",
+   "away_score": 30,
+   "home_score": 33,
+   "winner": "KC",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -377,7 +377,7 @@
     "over_under": 47.5,
     "moneyline_home": "-305",
     "moneyline_away": "+245",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
