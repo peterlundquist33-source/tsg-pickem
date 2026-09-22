@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-22T01:09:27Z",
+ "fetched_at": "2026-09-22T01:16:42Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -362,14 +362,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "12:01 - 2nd Quarter",
-   "short_detail": "12:01 - 2nd",
+   "detail": "7:46 - 2nd Quarter",
+   "short_detail": "7:46 - 2nd",
    "period": 2,
-   "clock": "12:01",
+   "clock": "7:46",
    "away_score": 0,
-   "home_score": 7,
+   "home_score": 14,
    "winner": null,
-   "home_win_prob": 0.8727,
+   "home_win_prob": 0.8886,
    "prob_source": "live",
    "odds": null
   }
