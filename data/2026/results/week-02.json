@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 2,
- "fetched_at": "2026-09-21T18:21:18Z",
+ "fetched_at": "2026-09-22T00:14:44Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872947",
  "games": [
@@ -377,7 +377,7 @@
     "over_under": 47.5,
     "moneyline_home": "-298",
     "moneyline_away": "+240",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   }
  ]
