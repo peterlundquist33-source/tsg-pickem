@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 3,
- "fetched_at": "2026-09-25T04:36:47Z",
+ "fetched_at": "2026-09-25T04:47:49Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872963",
  "games": [
@@ -292,7 +292,7 @@
    "odds": {
     "details": "JAX -3",
     "spread_home": -3,
-    "over_under": 45.5,
+    "over_under": 46.5,
     "moneyline_home": "-155",
     "moneyline_away": "+130",
     "provider": "DraftKings"
