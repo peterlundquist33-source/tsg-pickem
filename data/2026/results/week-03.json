@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 3,
- "fetched_at": "2026-09-27T07:18:54Z",
+ "fetched_at": "2026-09-27T11:18:19Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872963",
  "games": [
@@ -55,7 +55,7 @@
     "over_under": 42.5,
     "moneyline_home": "+114",
     "moneyline_away": "-135",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -85,7 +85,7 @@
     "over_under": 42.5,
     "moneyline_home": "+154",
     "moneyline_away": "-185",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -115,7 +115,7 @@
     "over_under": 42.5,
     "moneyline_home": "+105",
     "moneyline_away": "-125",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -145,7 +145,7 @@
     "over_under": 45.5,
     "moneyline_home": "+425",
     "moneyline_away": "-575",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -175,7 +175,7 @@
     "over_under": 50.5,
     "moneyline_home": "-340",
     "moneyline_away": "+270",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -205,7 +205,7 @@
     "over_under": 48.5,
     "moneyline_home": "-305",
     "moneyline_away": "+245",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -235,7 +235,7 @@
     "over_under": 40.5,
     "moneyline_home": "+310",
     "moneyline_away": "-395",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -265,7 +265,7 @@
     "over_under": 37.5,
     "moneyline_home": "-130",
     "moneyline_away": "+110",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -295,7 +295,7 @@
     "over_under": 45.5,
     "moneyline_home": "-155",
     "moneyline_away": "+130",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -325,7 +325,7 @@
     "over_under": 48.5,
     "moneyline_home": "-410",
     "moneyline_away": "+320",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -355,7 +355,7 @@
     "over_under": 42.5,
     "moneyline_home": "-105",
     "moneyline_away": "-115",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -385,7 +385,7 @@
     "over_under": 53.5,
     "moneyline_home": "+142",
     "moneyline_away": "-170",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -415,7 +415,7 @@
     "over_under": 43.5,
     "moneyline_home": "-198",
     "moneyline_away": "+164",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -445,7 +445,7 @@
     "over_under": 43.5,
     "moneyline_home": "+110",
     "moneyline_away": "-130",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   },
   {
@@ -475,7 +475,7 @@
     "over_under": 42.5,
     "moneyline_home": "+164",
     "moneyline_away": "-198",
-    "provider": "DraftKings"
+    "provider": "Draft Kings"
    }
   }
  ]
