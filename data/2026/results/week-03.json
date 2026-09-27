@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 3,
- "fetched_at": "2026-09-27T22:18:18Z",
+ "fetched_at": "2026-09-27T22:29:38Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872963",
  "games": [
@@ -247,14 +247,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "4:29 - 3rd Quarter",
-   "short_detail": "4:29 - 3rd",
+   "detail": "0:31 - 3rd Quarter",
+   "short_detail": "0:31 - 3rd",
    "period": 3,
-   "clock": "4:29",
-   "away_score": 6,
+   "clock": "0:31",
+   "away_score": 13,
    "home_score": 23,
    "winner": null,
-   "home_win_prob": 0.9728,
+   "home_win_prob": 0.919,
    "prob_source": "live",
    "odds": null
   },
@@ -270,14 +270,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "7:56 - 3rd Quarter",
-   "short_detail": "7:56 - 3rd",
+   "detail": "4:03 - 3rd Quarter",
+   "short_detail": "4:03 - 3rd",
    "period": 3,
-   "clock": "7:56",
+   "clock": "4:03",
    "away_score": 17,
-   "home_score": 10,
+   "home_score": 13,
    "winner": null,
-   "home_win_prob": 0.3378,
+   "home_win_prob": 0.2512,
    "prob_source": "live",
    "odds": null
   },
@@ -293,14 +293,14 @@
    "neutral_site": true,
    "status": "in",
    "completed": false,
-   "detail": "10:34 - 3rd Quarter",
-   "short_detail": "10:34 - 3rd",
+   "detail": "5:54 - 3rd Quarter",
+   "short_detail": "5:54 - 3rd",
    "period": 3,
-   "clock": "10:34",
+   "clock": "5:54",
    "away_score": 17,
    "home_score": 13,
    "winner": null,
-   "home_win_prob": 0.314,
+   "home_win_prob": 0.2585,
    "prob_source": "live",
    "odds": null
   },
@@ -316,14 +316,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "13:30 - 3rd Quarter",
-   "short_detail": "13:30 - 3rd",
+   "detail": "6:33 - 3rd Quarter",
+   "short_detail": "6:33 - 3rd",
    "period": 3,
-   "clock": "13:30",
+   "clock": "6:33",
    "away_score": 16,
-   "home_score": 13,
+   "home_score": 20,
    "winner": null,
-   "home_win_prob": 0.4888,
+   "home_win_prob": 0.7995,
    "prob_source": "live",
    "odds": null
   },
@@ -354,7 +354,7 @@
     "over_under": 44.5,
     "moneyline_home": "-105",
     "moneyline_away": "-115",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -384,7 +384,7 @@
     "over_under": 41.5,
     "moneyline_home": "+170",
     "moneyline_away": "-205",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
