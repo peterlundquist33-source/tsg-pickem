@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 3,
- "fetched_at": "2026-09-27T21:57:21Z",
+ "fetched_at": "2026-09-27T22:11:44Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872963",
  "games": [
@@ -247,14 +247,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "13:38 - 3rd Quarter",
-   "short_detail": "13:38 - 3rd",
+   "detail": "8:25 - 3rd Quarter",
+   "short_detail": "8:25 - 3rd",
    "period": 3,
-   "clock": "13:38",
+   "clock": "8:25",
    "away_score": 6,
-   "home_score": 17,
+   "home_score": 23,
    "winner": null,
-   "home_win_prob": 0.9689,
+   "home_win_prob": 0.9745,
    "prob_source": "live",
    "odds": null
   },
@@ -270,14 +270,14 @@
    "neutral_site": false,
    "status": "in",
    "completed": false,
-   "detail": "13:38 - 3rd Quarter",
-   "short_detail": "13:38 - 3rd",
+   "detail": "9:24 - 3rd Quarter",
+   "short_detail": "9:24 - 3rd",
    "period": 3,
-   "clock": "13:38",
+   "clock": "9:24",
    "away_score": 17,
    "home_score": 10,
    "winner": null,
-   "home_win_prob": 0.2852,
+   "home_win_prob": 0.211,
    "prob_source": "live",
    "odds": null
   },
@@ -293,14 +293,14 @@
    "neutral_site": true,
    "status": "in",
    "completed": false,
-   "detail": "Halftime",
-   "short_detail": "Halftime",
-   "period": 2,
-   "clock": "0:00",
+   "detail": "14:20 - 3rd Quarter",
+   "short_detail": "14:20 - 3rd",
+   "period": 3,
+   "clock": "14:20",
    "away_score": 17,
    "home_score": 13,
    "winner": null,
-   "home_win_prob": 0.3445,
+   "home_win_prob": 0.3715,
    "prob_source": "live",
    "odds": null
   },
@@ -323,7 +323,7 @@
    "away_score": 16,
    "home_score": 13,
    "winner": null,
-   "home_win_prob": 0.5375,
+   "home_win_prob": 0.4922,
    "prob_source": "live",
    "odds": null
   },
@@ -346,15 +346,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4826,
+   "home_win_prob": 0.4892,
    "prob_source": "moneyline",
    "odds": {
     "details": "LAR -1.5",
     "spread_home": 1.5,
     "over_under": 44.5,
-    "moneyline_home": "-102",
-    "moneyline_away": "-118",
-    "provider": "Draft Kings"
+    "moneyline_home": "-105",
+    "moneyline_away": "-115",
+    "provider": "DraftKings"
    }
   },
   {
@@ -384,7 +384,7 @@
     "over_under": 41.5,
     "moneyline_home": "+170",
     "moneyline_away": "-205",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
