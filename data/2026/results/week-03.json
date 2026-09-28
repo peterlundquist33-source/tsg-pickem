@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 3,
- "fetched_at": "2026-09-28T04:16:34Z",
+ "fetched_at": "2026-09-28T04:35:00Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872963",
  "games": [
@@ -369,14 +369,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3553,
+   "home_win_prob": 0.3631,
    "prob_source": "moneyline",
    "odds": {
-    "details": "PHI -4.5",
-    "spread_home": 4.5,
+    "details": "PHI -3.5",
+    "spread_home": 3.5,
     "over_under": 41.5,
-    "moneyline_home": "+170",
-    "moneyline_away": "-205",
+    "moneyline_home": "+164",
+    "moneyline_away": "-198",
     "provider": "DraftKings"
    }
   }
