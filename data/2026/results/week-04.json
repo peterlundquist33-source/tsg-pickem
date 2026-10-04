@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 4,
- "fetched_at": "2026-10-04T09:37:18Z",
+ "fetched_at": "2026-10-04T15:16:57Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872979",
  "games": [
@@ -38,25 +38,18 @@
    "home_name": "Washington Commanders",
    "kickoff": "2026-10-04T13:30Z",
    "neutral_site": true,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, October 4th at 9:30 AM EDT",
-   "short_detail": "10/4 - 9:30 AM EDT",
-   "period": 0,
+   "detail": "Halftime",
+   "short_detail": "Halftime",
+   "period": 2,
    "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "away_score": 10,
+   "home_score": 6,
    "winner": null,
-   "home_win_prob": 0.3553,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "IND -4.5",
-    "spread_home": 4.5,
-    "over_under": 46.5,
-    "moneyline_home": "+170",
-    "moneyline_away": "-205",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.3316,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401872966",
@@ -85,7 +78,7 @@
     "over_under": 44.5,
     "moneyline_home": "+114",
     "moneyline_away": "-135",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -115,7 +108,7 @@
     "over_under": 48.5,
     "moneyline_home": "-148",
     "moneyline_away": "+124",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -137,15 +130,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4004,
+   "home_win_prob": 0.3908,
    "prob_source": "moneyline",
    "odds": {
     "details": "GB -3",
     "spread_home": 3,
     "over_under": 38.5,
-    "moneyline_home": "+140",
-    "moneyline_away": "-166",
-    "provider": "Draft Kings"
+    "moneyline_home": "+145",
+    "moneyline_away": "-175",
+    "provider": "DraftKings"
    }
   },
   {
@@ -167,15 +160,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5635,
+   "home_win_prob": 0.5721,
    "prob_source": "moneyline",
    "odds": {
     "details": "CIN -2.5",
     "spread_home": -2.5,
     "over_under": 51.5,
-    "moneyline_home": "-142",
-    "moneyline_away": "+120",
-    "provider": "Draft Kings"
+    "moneyline_home": "-148",
+    "moneyline_away": "+124",
+    "provider": "DraftKings"
    }
   },
   {
@@ -197,15 +190,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3836,
+   "home_win_prob": 0.3631,
    "prob_source": "moneyline",
    "odds": {
     "details": "LAR -3.5",
     "spread_home": 3.5,
     "over_under": 42.5,
-    "moneyline_home": "+150",
-    "moneyline_away": "-180",
-    "provider": "Draft Kings"
+    "moneyline_home": "+164",
+    "moneyline_away": "-198",
+    "provider": "DraftKings"
    }
   },
   {
@@ -227,15 +220,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.7221,
+   "home_win_prob": 0.7335,
    "prob_source": "moneyline",
    "odds": {
     "details": "BUF -7",
     "spread_home": -7,
-    "over_under": 50.5,
-    "moneyline_home": "-305",
-    "moneyline_away": "+245",
-    "provider": "Draft Kings"
+    "over_under": 49.5,
+    "moneyline_home": "-325",
+    "moneyline_away": "+260",
+    "provider": "DraftKings"
    }
   },
   {
@@ -265,7 +258,7 @@
     "over_under": 43.5,
     "moneyline_home": "-185",
     "moneyline_away": "+154",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -287,15 +280,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.84,
+   "home_win_prob": 0.8465,
    "prob_source": "moneyline",
    "odds": {
     "details": "BAL -11.5",
     "spread_home": -11.5,
-    "over_under": 41.5,
-    "moneyline_home": "-700",
-    "moneyline_away": "+500",
-    "provider": "Draft Kings"
+    "over_under": 42.5,
+    "moneyline_home": "-750",
+    "moneyline_away": "+525",
+    "provider": "DraftKings"
    }
   },
   {
@@ -317,15 +310,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.8043,
+   "home_win_prob": 0.8082,
    "prob_source": "moneyline",
    "odds": {
     "details": "MIN -10",
     "spread_home": -10,
     "over_under": 38.5,
-    "moneyline_home": "-520",
-    "moneyline_away": "+390",
-    "provider": "Draft Kings"
+    "moneyline_home": "-535",
+    "moneyline_away": "+400",
+    "provider": "DraftKings"
    }
   },
   {
@@ -347,15 +340,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5721,
+   "home_win_prob": 0.5934,
    "prob_source": "moneyline",
    "odds": {
     "details": "SF -3",
     "spread_home": -3,
     "over_under": 48.5,
-    "moneyline_home": "-148",
-    "moneyline_away": "+124",
-    "provider": "Draft Kings"
+    "moneyline_home": "-162",
+    "moneyline_away": "+136",
+    "provider": "DraftKings"
    }
   },
   {
@@ -385,7 +378,7 @@
     "over_under": 47.5,
     "moneyline_home": "+185",
     "moneyline_away": "-225",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -407,15 +400,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.7572,
+   "home_win_prob": 0.7508,
    "prob_source": "moneyline",
    "odds": {
     "details": "SEA -7",
     "spread_home": -7,
     "over_under": 42.5,
-    "moneyline_home": "-375",
-    "moneyline_away": "+295",
-    "provider": "Draft Kings"
+    "moneyline_home": "-360",
+    "moneyline_away": "+285",
+    "provider": "DraftKings"
    }
   },
   {
@@ -437,15 +430,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3691,
+   "home_win_prob": 0.3631,
    "prob_source": "moneyline",
    "odds": {
     "details": "DET -3.5",
     "spread_home": 3.5,
     "over_under": 51.5,
-    "moneyline_home": "+160",
-    "moneyline_away": "-192",
-    "provider": "Draft Kings"
+    "moneyline_home": "+164",
+    "moneyline_away": "-198",
+    "provider": "DraftKings"
    }
   },
   {
@@ -475,7 +468,7 @@
     "over_under": 47.5,
     "moneyline_home": "-130",
     "moneyline_away": "+110",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
