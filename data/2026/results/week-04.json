@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 4,
- "fetched_at": "2026-10-05T18:18:46Z",
+ "fetched_at": "2026-10-06T00:44:35Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872979",
  "games": [
@@ -360,25 +360,18 @@
    "home_name": "New Orleans Saints",
    "kickoff": "2026-10-06T00:15Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Mon, October 5th at 8:15 PM EDT",
-   "short_detail": "10/5 - 8:15 PM EDT",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
+   "detail": "10:25 - 1st Quarter",
+   "short_detail": "10:25 - 1st",
+   "period": 1,
+   "clock": "10:25",
+   "away_score": 7,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5261,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "NO -1.5",
-    "spread_home": -1.5,
-    "over_under": 47.5,
-    "moneyline_home": "-122",
-    "moneyline_away": "+102",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.4371,
+   "prob_source": "live",
+   "odds": null
   }
  ]
 }
