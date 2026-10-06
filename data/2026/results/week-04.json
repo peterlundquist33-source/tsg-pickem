@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 4,
- "fetched_at": "2026-10-06T00:44:35Z",
+ "fetched_at": "2026-10-06T05:07:46Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872979",
  "games": [
@@ -360,17 +360,17 @@
    "home_name": "New Orleans Saints",
    "kickoff": "2026-10-06T00:15Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "10:25 - 1st Quarter",
-   "short_detail": "10:25 - 1st",
-   "period": 1,
-   "clock": "10:25",
-   "away_score": 7,
-   "home_score": 0,
-   "winner": null,
-   "home_win_prob": 0.4371,
-   "prob_source": "live",
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
+   "period": 4,
+   "clock": "0:00",
+   "away_score": 45,
+   "home_score": 24,
+   "winner": "ATL",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   }
  ]
