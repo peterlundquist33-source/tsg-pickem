@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 5,
- "fetched_at": "2026-10-11T05:34:53Z",
+ "fetched_at": "2026-10-11T12:38:17Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872994",
  "games": [
@@ -47,14 +47,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.7715,
+   "home_win_prob": 0.76,
    "prob_source": "moneyline",
    "odds": {
     "details": "JAX -7.5",
     "spread_home": -7.5,
     "over_under": 41.5,
-    "moneyline_home": "-410",
-    "moneyline_away": "+320",
+    "moneyline_home": "-380",
+    "moneyline_away": "+300",
     "provider": "Draft Kings"
    }
   },
@@ -77,14 +77,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.2522,
+   "home_win_prob": 0.2559,
    "prob_source": "moneyline",
    "odds": {
     "details": "CIN -7",
     "spread_home": 7,
     "over_under": 43.5,
-    "moneyline_home": "+280",
-    "moneyline_away": "-355",
+    "moneyline_home": "+275",
+    "moneyline_away": "-345",
     "provider": "Draft Kings"
    }
   },
@@ -137,14 +137,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.2559,
+   "home_win_prob": 0.2522,
    "prob_source": "moneyline",
    "odds": {
     "details": "HOU -7",
     "spread_home": 7,
-    "over_under": 37.5,
-    "moneyline_home": "+275",
-    "moneyline_away": "-345",
+    "over_under": 38.5,
+    "moneyline_home": "+280",
+    "moneyline_away": "-355",
     "provider": "Draft Kings"
    }
   },
@@ -167,14 +167,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5635,
+   "home_win_prob": 0.5721,
    "prob_source": "moneyline",
    "odds": {
-    "details": "PIT -2.5",
-    "spread_home": -2.5,
+    "details": "PIT -3",
+    "spread_home": -3,
     "over_under": 43.5,
-    "moneyline_home": "-142",
-    "moneyline_away": "+120",
+    "moneyline_home": "-148",
+    "moneyline_away": "+124",
     "provider": "Draft Kings"
    }
   },
@@ -197,14 +197,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6309,
+   "home_win_prob": 0.6225,
    "prob_source": "moneyline",
    "odds": {
     "details": "NE -3.5",
     "spread_home": -3.5,
     "over_under": 45.5,
-    "moneyline_home": "-192",
-    "moneyline_away": "+160",
+    "moneyline_home": "-185",
+    "moneyline_away": "+154",
     "provider": "Draft Kings"
    }
   },
@@ -230,8 +230,8 @@
    "home_win_prob": 0.4573,
    "prob_source": "moneyline",
    "odds": {
-    "details": "MIN -2.5",
-    "spread_home": 2.5,
+    "details": "MIN -1.5",
+    "spread_home": 1.5,
     "over_under": 41.5,
     "moneyline_home": "+110",
     "moneyline_away": "-130",
@@ -257,14 +257,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6092,
+   "home_win_prob": 0.6225,
    "prob_source": "moneyline",
    "odds": {
     "details": "WSH -3.5",
     "spread_home": -3.5,
     "over_under": 41.5,
-    "moneyline_home": "-175",
-    "moneyline_away": "+145",
+    "moneyline_home": "-185",
+    "moneyline_away": "+154",
     "provider": "Draft Kings"
    }
   },
@@ -287,14 +287,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4739,
+   "home_win_prob": 0.4675,
    "prob_source": "moneyline",
    "odds": {
     "details": "CHI -1.5",
     "spread_home": 1.5,
-    "over_under": 46.5,
-    "moneyline_home": "+102",
-    "moneyline_away": "-122",
+    "over_under": 47.5,
+    "moneyline_home": "+105",
+    "moneyline_away": "-125",
     "provider": "Draft Kings"
    }
   },
@@ -347,14 +347,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3146,
+   "home_win_prob": 0.3092,
    "prob_source": "moneyline",
    "odds": {
     "details": "DET -5.5",
     "spread_home": 5.5,
     "over_under": 54.5,
-    "moneyline_home": "+205",
-    "moneyline_away": "-250",
+    "moneyline_home": "+210",
+    "moneyline_away": "-258",
     "provider": "Draft Kings"
    }
   },
@@ -377,14 +377,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5934,
+   "home_win_prob": 0.5996,
    "prob_source": "moneyline",
    "odds": {
     "details": "SEA -3",
     "spread_home": -3,
-    "over_under": 45.5,
-    "moneyline_home": "-162",
-    "moneyline_away": "+136",
+    "over_under": 46.5,
+    "moneyline_home": "-166",
+    "moneyline_away": "+140",
     "provider": "Draft Kings"
    }
   },
