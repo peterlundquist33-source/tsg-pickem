@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 5,
- "fetched_at": "2026-10-12T01:11:58Z",
+ "fetched_at": "2026-10-12T04:12:31Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872994",
  "games": [
@@ -314,17 +314,17 @@
    "home_name": "Atlanta Falcons",
    "kickoff": "2026-10-12T00:20Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "14:20 - 2nd Quarter",
-   "short_detail": "14:20 - 2nd",
-   "period": 2,
-   "clock": "14:20",
-   "away_score": 3,
-   "home_score": 7,
-   "winner": null,
-   "home_win_prob": 0.6514,
-   "prob_source": "live",
+   "status": "post",
+   "completed": true,
+   "detail": "Final/OT",
+   "short_detail": "Final/OT",
+   "period": 5,
+   "clock": "0:00",
+   "away_score": 30,
+   "home_score": 23,
+   "winner": "BAL",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -354,7 +354,7 @@
     "over_under": 54.5,
     "moneyline_home": "-180",
     "moneyline_away": "+150",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
