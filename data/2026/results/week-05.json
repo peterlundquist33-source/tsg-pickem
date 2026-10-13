@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 5,
- "fetched_at": "2026-10-13T01:15:04Z",
+ "fetched_at": "2026-10-13T05:41:12Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401872994",
  "games": [
@@ -337,17 +337,17 @@
    "home_name": "Los Angeles Rams",
    "kickoff": "2026-10-13T00:15Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "5:09 - 2nd Quarter",
-   "short_detail": "5:09 - 2nd",
-   "period": 2,
-   "clock": "5:09",
-   "away_score": 12,
-   "home_score": 7,
-   "winner": null,
-   "home_win_prob": 0.3917,
-   "prob_source": "live",
+   "status": "post",
+   "completed": true,
+   "detail": "Final/OT",
+   "short_detail": "Final/OT",
+   "period": 5,
+   "clock": "0:00",
+   "away_score": 37,
+   "home_score": 34,
+   "winner": "BUF",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   }
  ]
