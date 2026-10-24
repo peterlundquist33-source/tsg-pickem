@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 7,
- "fetched_at": "2026-10-24T18:02:52Z",
+ "fetched_at": "2026-10-24T20:41:44Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401873009",
  "games": [
@@ -47,15 +47,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4004,
+   "home_win_prob": 0.4066,
    "prob_source": "moneyline",
    "odds": {
     "details": "PIT -3",
     "spread_home": 3,
     "over_under": 44.5,
-    "moneyline_home": "+140",
-    "moneyline_away": "-166",
-    "provider": "Draft Kings"
+    "moneyline_home": "+136",
+    "moneyline_away": "-162",
+    "provider": "DraftKings"
    }
   },
   {
@@ -77,15 +77,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4826,
+   "home_win_prob": 0.4279,
    "prob_source": "moneyline",
    "odds": {
-    "details": "CIN -1.5",
-    "spread_home": 1.5,
-    "over_under": 47.5,
-    "moneyline_home": "-102",
-    "moneyline_away": "-118",
-    "provider": "Draft Kings"
+    "details": "CIN -2.5",
+    "spread_home": 2.5,
+    "over_under": 46.5,
+    "moneyline_home": "+124",
+    "moneyline_away": "-148",
+    "provider": "DraftKings"
    }
   },
   {
@@ -115,7 +115,7 @@
     "over_under": 36.5,
     "moneyline_home": "+110",
     "moneyline_away": "-130",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -145,7 +145,7 @@
     "over_under": 41.5,
     "moneyline_home": "-290",
     "moneyline_away": "+235",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -167,15 +167,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.669,
+   "home_win_prob": 0.6636,
    "prob_source": "moneyline",
    "odds": {
     "details": "NYJ -4.5",
     "spread_home": -4.5,
     "over_under": 39.5,
-    "moneyline_home": "-230",
-    "moneyline_away": "+190",
-    "provider": "Draft Kings"
+    "moneyline_home": "-225",
+    "moneyline_away": "+185",
+    "provider": "DraftKings"
    }
   },
   {
@@ -205,7 +205,7 @@
     "over_under": 42.5,
     "moneyline_home": "-500",
     "moneyline_away": "+380",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -235,7 +235,7 @@
     "over_under": 49.5,
     "moneyline_home": "+124",
     "moneyline_away": "-148",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -265,7 +265,7 @@
     "over_under": 44.5,
     "moneyline_home": "-155",
     "moneyline_away": "+130",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -295,7 +295,7 @@
     "over_under": 43.5,
     "moneyline_home": "+190",
     "moneyline_away": "-230",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -325,7 +325,7 @@
     "over_under": 53.5,
     "moneyline_home": "-180",
     "moneyline_away": "+150",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   },
   {
@@ -347,15 +347,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3836,
+   "home_win_prob": 0.3908,
    "prob_source": "moneyline",
    "odds": {
     "details": "LAR -3",
     "spread_home": 3,
     "over_under": 48.5,
-    "moneyline_home": "+150",
-    "moneyline_away": "-180",
-    "provider": "Draft Kings"
+    "moneyline_home": "+145",
+    "moneyline_away": "-175",
+    "provider": "DraftKings"
    }
   },
   {
@@ -377,15 +377,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.5721,
+   "home_win_prob": 0.5635,
    "prob_source": "moneyline",
    "odds": {
     "details": "SEA -3",
     "spread_home": -3,
     "over_under": 42.5,
-    "moneyline_home": "-148",
-    "moneyline_away": "+124",
-    "provider": "Draft Kings"
+    "moneyline_home": "-142",
+    "moneyline_away": "+120",
+    "provider": "DraftKings"
    }
   },
   {
@@ -415,7 +415,7 @@
     "over_under": 44.5,
     "moneyline_home": "+180",
     "moneyline_away": "-218",
-    "provider": "Draft Kings"
+    "provider": "DraftKings"
    }
   }
  ]
