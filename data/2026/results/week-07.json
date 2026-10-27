@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 7,
- "fetched_at": "2026-10-26T23:45:29Z",
+ "fetched_at": "2026-10-27T03:54:23Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401873009",
  "games": [
@@ -314,25 +314,18 @@
    "home_name": "Philadelphia Eagles",
    "kickoff": "2026-10-27T00:15Z",
    "neutral_site": false,
-   "status": "pre",
-   "completed": false,
-   "detail": "Mon, October 26th at 8:15 PM EDT",
-   "short_detail": "10/26 - 8:15 PM EDT",
-   "period": 0,
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
+   "period": 4,
    "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
-   "winner": null,
-   "home_win_prob": 0.3364,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "DAL -4.5",
-    "spread_home": 4.5,
-    "over_under": 43.5,
-    "moneyline_home": "+185",
-    "moneyline_away": "-225",
-    "provider": "DraftKings"
-   }
+   "away_score": 38,
+   "home_score": 21,
+   "winner": "DAL",
+   "home_win_prob": null,
+   "prob_source": null,
+   "odds": null
   }
  ]
 }
