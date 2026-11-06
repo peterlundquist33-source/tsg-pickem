@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 9,
- "fetched_at": "2026-11-06T03:52:39Z",
+ "fetched_at": "2026-11-06T09:15:26Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401873051",
  "games": [
@@ -15,17 +15,17 @@
    "home_name": "Baltimore Ravens",
    "kickoff": "2026-11-06T01:15Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "8:12 - 4th Quarter",
-   "short_detail": "8:12 - 4th",
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
    "period": 4,
-   "clock": "8:12",
-   "away_score": 26,
-   "home_score": 3,
-   "winner": null,
-   "home_win_prob": 0.001,
-   "prob_source": "live",
+   "clock": "0:00",
+   "away_score": 33,
+   "home_score": 10,
+   "winner": "JAX",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -437,14 +437,14 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.4004,
+   "home_win_prob": 0.3908,
    "prob_source": "moneyline",
    "odds": {
     "details": "BUF -3",
     "spread_home": 3,
     "over_under": 44.5,
-    "moneyline_home": "+140",
-    "moneyline_away": "-166",
+    "moneyline_home": "+145",
+    "moneyline_away": "-175",
     "provider": "Draft Kings"
    }
   }
