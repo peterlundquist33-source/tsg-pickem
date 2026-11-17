@@ -260,15 +260,34 @@
   // Which way should each Crew member want each open game to go, and how much
   // is it worth? Swing is the change in top-8 chance between the two outcomes,
   // in percentage points.
+  // A hidden section is an undiscoverable one: outside of game day every week
+  // on the site is final, so vanishing entirely means nobody ever learns this
+  // exists. It rests with an explanation instead.
+  function rootingRest(msg) {
+    $("root-section").hidden = false;
+    $("root-sub").textContent = "";
+    $("root-grid").innerHTML = '<tbody><tr><td class="root-rest">' + esc(msg) + "</td></tr></tbody>";
+  }
+
   function renderRooting() {
     var sec = $("root-section");
     var m = state.model, lev = state.sim && state.sim.leverage;
-    if (!m || !lev || m.all_final) { sec.hidden = true; return; }
+    if (!m) { sec.hidden = true; return; }
+    if (m.all_final) {
+      rootingRest("Every Week " + m.week + " game is final — nothing left to root for. "
+        + "This fills in once a week's picks are in and games are still open, and "
+        + "ranks each one by how much it swings the Crew's top-8 odds.");
+      return;
+    }
+    if (!lev) { sec.hidden = true; return; }
 
     var byName = {};
     m.standings.forEach(function (e) { byName[norm(e.name)] = e; });
     var six = SIX.map(function (n) { return byName[norm(n)] || null; });
-    if (!six.some(Boolean)) { sec.hidden = true; return; }
+    if (!six.some(Boolean)) {
+      rootingRest("Nobody from the Crew is in this week's sheet yet.");
+      return;
+    }
 
     // One row per open game, biggest Crew-wide swing first.
     var rows = {};
@@ -281,7 +300,10 @@
       });
     });
     var list = Object.keys(rows).map(function (k) { return rows[k]; });
-    if (!list.length) { sec.hidden = true; return; }
+    if (!list.length) {
+      rootingRest("No open game moves the Crew's odds enough to measure yet.");
+      return;
+    }
     list.forEach(function (r) {
       r.peak = Math.max.apply(null, Object.keys(r.by).map(function (k) { return Math.abs(r.by[k].swing); }));
       var teams = Object.keys(r.by).map(function (k) { return r.by[k].root_for; });

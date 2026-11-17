@@ -212,6 +212,10 @@ table.grid tfoot .hot { color: var(--accent); }
 .root.t2 { color: var(--gold); border-color: rgba(245, 196, 81, .45); background: rgba(245, 196, 81, .1); }
 .root.t3 { color: var(--accent); border-color: var(--accent-line); background: var(--accent-tint); }
 table.rootgrid .g-sub { color: var(--text-3); }
+td.root-rest {
+  color: var(--text-2); font-weight: 400; white-space: normal;
+  padding: var(--s-3); line-height: 1.5; text-align: left;
+}
 
 /* ---------- The Crew: season week strip ---------- */
 table.season-grid th:first-child, table.season-grid td:first-child { min-width: 64px; }
