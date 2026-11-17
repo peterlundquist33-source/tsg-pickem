@@ -173,6 +173,16 @@ table.grid .g-sub.live { color: var(--pos); }
 .cell {
   display: inline-flex; align-items: baseline; gap: 4px; padding: 3px 7px; border-radius: var(--r-sm);
   border: 1px solid transparent; min-width: 58px; justify-content: center; font-weight: 600;
+  position: relative; isolation: isolate;
+}
+/* Confidence heat: --c is 0 at the throwaway pick, 1 at the lock. Painting
+   currentColor keeps the shade tied to the cell's own state — green firming up
+   as a win banks, red deepening as a big loss gets expensive — rather than
+   adding a third colour to compete with them. */
+.cell::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  border-radius: inherit; background: currentColor;
+  opacity: calc(var(--c, 0) * 0.2);
 }
 .cell .p { font-weight: 500; color: var(--text-3); }
 .cell.win      { background: var(--pos-tint); color: var(--pos); border-color: rgba(61,214,140,.3); }
@@ -187,6 +197,21 @@ table.grid .g-sub.live { color: var(--pos); }
 table.grid tfoot td { background: var(--surface-2); font-weight: 600; border-top: 1px solid var(--line-2); }
 table.grid tfoot td:first-child { background: var(--surface-2); color: var(--text-2); font-weight: 500; }
 table.grid tfoot .hot { color: var(--accent); }
+
+/* ---------- Rooting guide ---------- */
+.root {
+  display: inline-flex; align-items: baseline; gap: 5px; padding: 3px 7px;
+  border-radius: var(--r-sm); border: 1px solid transparent;
+  min-width: 64px; justify-content: center; font-weight: 600;
+}
+.root .sw { font-weight: 500; font-size: var(--fs-11); opacity: .75; }
+.root.none { color: var(--text-3); font-weight: 500; min-width: 0; }
+/* Three tiers, not a gradient: the question is "does this game matter to me",
+   and a continuous ramp makes every cell look like it half-matters. */
+.root.t1 { color: var(--text-2); border-color: var(--line-2); }
+.root.t2 { color: var(--gold); border-color: rgba(245, 196, 81, .45); background: rgba(245, 196, 81, .1); }
+.root.t3 { color: var(--accent); border-color: var(--accent-line); background: var(--accent-tint); }
+table.rootgrid .g-sub { color: var(--text-3); }
 
 /* ---------- The Crew: season week strip ---------- */
 table.season-grid th:first-child, table.season-grid td:first-child { min-width: 64px; }

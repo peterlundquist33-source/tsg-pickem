@@ -85,7 +85,8 @@
     if (!state.weekDoc) return;
     var model = Pool.buildWeek(state.weekDoc, pickResults());
     state.model = model;
-    state.sim = model.all_final ? Pool.settle(model) : Pool.simulate(model, { sims: SIMS, seed: 20260918 + model.week });
+    state.sim = model.all_final ? Pool.settle(model)
+      : Pool.simulate(model, { sims: SIMS, seed: 20260918 + model.week, leverage: true });
     renderAll();
     if (state.seasonDocs) computeSeason(); // the open week feeds the season view with its live points
   }
@@ -251,8 +252,69 @@
     renderHeader();
     if (state.view === "week") renderStatus();
     renderSix();
+    renderRooting();
     renderGames();
     renderStandings();
+  }
+
+  // Which way should each Crew member want each open game to go, and how much
+  // is it worth? Swing is the change in top-8 chance between the two outcomes,
+  // in percentage points.
+  function renderRooting() {
+    var sec = $("root-section");
+    var m = state.model, lev = state.sim && state.sim.leverage;
+    if (!m || !lev || m.all_final) { sec.hidden = true; return; }
+
+    var byName = {};
+    m.standings.forEach(function (e) { byName[norm(e.name)] = e; });
+    var six = SIX.map(function (n) { return byName[norm(n)] || null; });
+    if (!six.some(Boolean)) { sec.hidden = true; return; }
+
+    // One row per open game, biggest Crew-wide swing first.
+    var rows = {};
+    six.forEach(function (e) {
+      if (!e) return;
+      (lev[e.name] || []).forEach(function (L) {
+        if (L.swing == null) return;
+        (rows[L.idx] = rows[L.idx] || { idx: L.idx, away: L.away, home: L.home, by: {} });
+        rows[L.idx].by[e.name] = L;
+      });
+    });
+    var list = Object.keys(rows).map(function (k) { return rows[k]; });
+    if (!list.length) { sec.hidden = true; return; }
+    list.forEach(function (r) {
+      r.peak = Math.max.apply(null, Object.keys(r.by).map(function (k) { return Math.abs(r.by[k].swing); }));
+      var teams = Object.keys(r.by).map(function (k) { return r.by[k].root_for; });
+      r.split = teams.some(function (t) { return t !== teams[0]; });
+    });
+    list.sort(function (a, b) { return b.peak - a.peak; });
+
+    sec.hidden = false;
+    $("root-sub").textContent = list.length + " game" + (list.length === 1 ? "" : "s") +
+      " still open · swing = points of top-8 chance between the two outcomes";
+
+    var head = "<thead><tr><th>Game</th>" + SIX.map(function (n, i) {
+      return "<th" + (six[i] && isMe(six[i].name) ? ' class="me"' : "") + ">" + esc(firstName(n)) + "</th>";
+    }).join("") + "</tr></thead>";
+
+    var body = "<tbody>" + list.map(function (r) {
+      var cells = six.map(function (e) {
+        if (!e) return "<td></td>";
+        var L = r.by[e.name];
+        if (!L) return '<td><span class="root none">–</span></td>';
+        var mag = Math.abs(L.swing) * 100;
+        // Under a point either way it is noise, not a rooting interest.
+        if (mag < 1) return '<td><span class="root none" title="no real stake">–</span></td>';
+        var tier = mag >= 15 ? " t3" : mag >= 6 ? " t2" : " t1";
+        return '<td><span class="root' + tier + '" title="' + esc(L.root_for) + " is worth " +
+          mag.toFixed(1) + ' points of top-8 chance">' + esc(L.root_for) +
+          '<span class="sw">+' + mag.toFixed(mag < 10 ? 1 : 0) + "</span></span></td>";
+      }).join("");
+      return "<tr><td><span class='g-line'>" + esc(r.away) + " @ " + esc(r.home) + "</span>" +
+        "<span class='g-sub'>" + (r.split ? "Crew is split" : "Crew agrees") + "</span></td>" + cells + "</tr>";
+    }).join("") + "</tbody>";
+
+    $("root-grid").innerHTML = head + body;
   }
 
   function simFor(name) {
@@ -291,6 +353,8 @@
     var games = m.games.slice().sort(function (a, b) {
       return (a.kickoff || "") < (b.kickoff || "") ? -1 : (a.kickoff || "") > (b.kickoff || "") ? 1 : a.idx - b.idx;
     });
+    // Confidence runs 1..n_games, so the top number scales with the slate.
+    var nGames = m.n_games || games.length;
     var head = "<thead><tr><th>Game</th>" + SIX.map(function (n, i) {
       return "<th" + (six[i] && isMe(six[i].name) ? ' class="me"' : "") + ">" + esc(firstName(n)) + "</th>";
     }).join("") + "</tr></thead>";
@@ -303,7 +367,11 @@
         if (!e) return "<td></td>";
         var c = e.cells[g.idx];
         if (!c || !c.pick) return '<td><span class="cell pending">–</span></td>';
-        return '<td><span class="cell ' + c.state + '" title="' + esc(c.state) + '">' + esc(c.pick) + ' <span class="p">' + c.pts + "</span></span></td>";
+        // --c drives the heat shading: 0 at the throwaway pick, 1 at the lock.
+        var heat = nGames > 1 ? Math.max(0, (c.pts - 1) / (nGames - 1)) : 1;
+        return '<td><span class="cell ' + c.state + '" style="--c:' + heat.toFixed(3) +
+          '" title="' + esc(c.pick) + " · " + c.pts + " points · " + esc(c.state) + '">' +
+          esc(c.pick) + ' <span class="p">' + c.pts + "</span></span></td>";
       }).join("");
       return "<tr><td><span class='g-line'>" + esc(g.away) + " @ " + esc(g.home) + "</span><span class='g-sub" + (g.status === "in" ? " live" : "") + "'>" + esc(sub) + "</span></td>" + cells + "</tr>";
     }).join("") + "</tbody>";

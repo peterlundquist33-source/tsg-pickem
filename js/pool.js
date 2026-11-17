@@ -216,6 +216,17 @@
     var outcome = new Uint8Array(m);
     var top = new Float64Array(n), rankSum = new Float64Array(n), win = new Float64Array(n);
 
+    // Leverage: how much each open game swings each entry's top-N chance.
+    // Outcomes are drawn independently, so bucketing the same run by which way
+    // a game landed gives the conditional directly — no second simulation, and
+    // no bias from re-running with a game pinned.
+    var lev = !!opts.leverage;
+    var levH = lev ? new Float64Array(m * n) : null;
+    var levA = lev ? new Float64Array(m * n) : null;
+    var cntH = lev ? new Int32Array(m) : null;
+    var cntA = lev ? new Int32Array(m) : null;
+    var cred = lev ? new Float64Array(n) : null;
+
     for (var s = 0; s < sims; s++) {
       for (var j = 0; j < m; j++) outcome[j] = rand() < pHome[j] ? 1 : 0;
       counts.fill(0);
@@ -229,9 +240,18 @@
       for (var v = maxTotal; v >= 0; v--) { aboveAt[v] = above; above += counts[v]; }
       for (i = 0; i < n; i++) {
         var a = aboveAt[totals[i]], tied = counts[totals[i]];
-        if (a < topN) top[i] += Math.min(1, (topN - a) / tied);
+        var c = a < topN ? Math.min(1, (topN - a) / tied) : 0;
+        top[i] += c;
+        if (lev) cred[i] = c;
         if (a === 0) win[i] += 1 / tied;
         rankSum[i] += a + 1 + (tied - 1) / 2;
+      }
+      if (lev) {
+        for (j = 0; j < m; j++) {
+          var base = j * n;
+          if (outcome[j] === 1) { cntH[j] += 1; for (i = 0; i < n; i++) levH[base + i] += cred[i]; }
+          else { cntA[j] += 1; for (i = 0; i < n; i++) levA[base + i] += cred[i]; }
+        }
       }
     }
 
@@ -239,7 +259,28 @@
     entries.forEach(function (e, i) {
       out[e.name] = { top: top[i] / sims, win: win[i] / sims, exp_rank: rankSum[i] / sims };
     });
-    return { sims: sims, topN: topN, open: m, by_name: out };
+
+    var leverage = null;
+    if (lev) {
+      leverage = {};
+      entries.forEach(function (e, i) {
+        leverage[e.name] = open.map(function (g, j) {
+          // Both buckets need samples before a difference means anything; a
+          // near-certain game can land one-sided across every run.
+          var ok = cntH[j] > 0 && cntA[j] > 0;
+          var ph = ok ? levH[j * n + i] / cntH[j] : null;
+          var pa = ok ? levA[j * n + i] / cntA[j] : null;
+          return {
+            idx: g.idx, away: g.away, home: g.home,
+            home_top: ph, away_top: pa,
+            swing: ok ? ph - pa : null,          // + means a home win helps
+            root_for: ok ? (ph >= pa ? g.home : g.away) : null,
+            n_home: cntH[j], n_away: cntA[j]
+          };
+        });
+      });
+    }
+    return { sims: sims, topN: topN, open: m, by_name: out, leverage: leverage };
   }
 
   // Everyone is settled once nothing is open: top-8 is 1 or 0 (ties share).
