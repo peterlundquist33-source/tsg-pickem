@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 11,
- "fetched_at": "2026-11-20T03:32:54Z",
+ "fetched_at": "2026-11-20T04:35:37Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401873078",
  "games": [
@@ -15,17 +15,17 @@
    "home_name": "Houston Texans",
    "kickoff": "2026-11-20T01:15Z",
    "neutral_site": false,
-   "status": "in",
-   "completed": false,
-   "detail": "3:09 - 3rd Quarter",
-   "short_detail": "3:09 - 3rd",
-   "period": 3,
-   "clock": "3:09",
+   "status": "post",
+   "completed": true,
+   "detail": "Final",
+   "short_detail": "Final",
+   "period": 4,
+   "clock": "0:00",
    "away_score": 3,
    "home_score": 26,
-   "winner": null,
-   "home_win_prob": 0.9967,
-   "prob_source": "live",
+   "winner": "HOU",
+   "home_win_prob": null,
+   "prob_source": null,
    "odds": null
   },
   {
@@ -202,7 +202,7 @@
    "odds": {
     "details": "DAL -8.5",
     "spread_home": -8.5,
-    "over_under": 55.5,
+    "over_under": 54.5,
     "moneyline_home": "-387",
     "moneyline_away": "+307",
     "provider": "Draft Kings"
@@ -347,13 +347,13 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6107,
+   "home_win_prob": 0.6112,
    "prob_source": "moneyline",
    "odds": {
     "details": "SF -3.5",
     "spread_home": -3.5,
     "over_under": 46.5,
-    "moneyline_home": "-174",
+    "moneyline_home": "-175",
     "moneyline_away": "+147",
     "provider": "Draft Kings"
    }
