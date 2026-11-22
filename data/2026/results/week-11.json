@@ -1,7 +1,7 @@
 {
  "season": 2026,
  "week": 11,
- "fetched_at": "2026-11-22T11:07:21Z",
+ "fetched_at": "2026-11-22T19:27:18Z",
  "source": "cdn.espn.com/core/nfl/scoreboard",
  "tiebreaker_espn_id": "401873078",
  "games": [
@@ -38,25 +38,18 @@
    "home_name": "Kansas City Chiefs",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
+   "detail": "Halftime",
+   "short_detail": "Halftime",
+   "period": 2,
    "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "away_score": 7,
+   "home_score": 27,
    "winner": null,
-   "home_win_prob": 0.8932,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "KC -15.5",
-    "spread_home": -15.5,
-    "over_under": 40.5,
-    "moneyline_home": "-1320",
-    "moneyline_away": "+800",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.989,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873068",
@@ -68,25 +61,18 @@
    "home_name": "Carolina Panthers",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "detail": "2:22 - 2nd Quarter",
+   "short_detail": "2:22 - 2nd",
+   "period": 2,
+   "clock": "2:22",
+   "away_score": 26,
+   "home_score": 22,
    "winner": null,
-   "home_win_prob": 0.5689,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "CAR -3",
-    "spread_home": -3,
-    "over_under": 43.5,
-    "moneyline_home": "-145",
-    "moneyline_away": "+123",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": null,
+   "prob_source": null,
+   "odds": null
   },
   {
    "espn_id": "401873070",
@@ -98,25 +84,18 @@
    "home_name": "Buffalo Bills",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "detail": "1:24 - 2nd Quarter",
+   "short_detail": "1:24 - 2nd",
+   "period": 2,
+   "clock": "1:24",
+   "away_score": 3,
+   "home_score": 20,
    "winner": null,
-   "home_win_prob": 0.8998,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "BUF -16.5",
-    "spread_home": -16.5,
-    "over_under": 44.5,
-    "moneyline_home": "-1460",
-    "moneyline_away": "+860",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.9883,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873071",
@@ -128,25 +107,18 @@
    "home_name": "Chicago Bears",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "detail": "0:54 - 2nd Quarter",
+   "short_detail": "0:54 - 2nd",
+   "period": 2,
+   "clock": "0:54",
+   "away_score": 7,
+   "home_score": 16,
    "winner": null,
-   "home_win_prob": 0.8253,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "CHI -11.5",
-    "spread_home": -11.5,
-    "over_under": 48.5,
-    "moneyline_home": "-610",
-    "moneyline_away": "+450",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.8924,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873072",
@@ -158,25 +130,18 @@
    "home_name": "Detroit Lions",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
+   "detail": "Halftime",
+   "short_detail": "Halftime",
+   "period": 2,
    "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "away_score": 7,
+   "home_score": 10,
    "winner": null,
-   "home_win_prob": 0.6411,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "DET -3.5",
-    "spread_home": -3.5,
-    "over_under": 47.5,
-    "moneyline_home": "-200",
-    "moneyline_away": "+168",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.6734,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873073",
@@ -188,25 +153,18 @@
    "home_name": "Dallas Cowboys",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
-   "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "detail": "1:39 - 2nd Quarter",
+   "short_detail": "1:39 - 2nd",
+   "period": 2,
+   "clock": "1:39",
+   "away_score": 6,
+   "home_score": 27,
    "winner": null,
-   "home_win_prob": 0.7443,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "DAL -7.5",
-    "spread_home": -7.5,
-    "over_under": 54.5,
-    "moneyline_home": "-343",
-    "moneyline_away": "+276",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.9664,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873076",
@@ -218,25 +176,18 @@
    "home_name": "Philadelphia Eagles",
    "kickoff": "2026-11-22T18:00Z",
    "neutral_site": false,
-   "status": "pre",
+   "status": "in",
    "completed": false,
-   "detail": "Sun, November 22nd at 1:00 PM EST",
-   "short_detail": "11/22 - 1:00 PM EST",
-   "period": 0,
+   "detail": "Halftime",
+   "short_detail": "Halftime",
+   "period": 2,
    "clock": "0:00",
-   "away_score": 0,
-   "home_score": 0,
+   "away_score": 3,
+   "home_score": 13,
    "winner": null,
-   "home_win_prob": 0.3699,
-   "prob_source": "moneyline",
-   "odds": {
-    "details": "PIT -3.5",
-    "spread_home": 3.5,
-    "over_under": 37.5,
-    "moneyline_home": "+160",
-    "moneyline_away": "-190",
-    "provider": "Draft Kings"
-   }
+   "home_win_prob": 0.7296,
+   "prob_source": "live",
+   "odds": null
   },
   {
    "espn_id": "401873074",
@@ -257,15 +208,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6068,
+   "home_win_prob": 0.6155,
    "prob_source": "moneyline",
    "odds": {
     "details": "LAC -3",
     "spread_home": -3,
-    "over_under": 41.5,
-    "moneyline_home": "-172",
-    "moneyline_away": "+144",
-    "provider": "Draft Kings"
+    "over_under": 43.5,
+    "moneyline_home": "-178",
+    "moneyline_away": "+150",
+    "provider": "DraftKings"
    }
   },
   {
@@ -287,15 +238,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.3099,
+   "home_win_prob": 0.3022,
    "prob_source": "moneyline",
    "odds": {
     "details": "JAX -6",
     "spread_home": 6,
     "over_under": 45.5,
-    "moneyline_home": "+210",
-    "moneyline_away": "-255",
-    "provider": "Draft Kings"
+    "moneyline_home": "+218",
+    "moneyline_away": "-265",
+    "provider": "DraftKings"
    }
   },
   {
@@ -317,15 +268,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.8339,
+   "home_win_prob": 0.8233,
    "prob_source": "moneyline",
    "odds": {
     "details": "DEN -10.5",
     "spread_home": -10.5,
-    "over_under": 41.5,
-    "moneyline_home": "-660",
-    "moneyline_away": "+478",
-    "provider": "Draft Kings"
+    "over_under": 40.5,
+    "moneyline_home": "-596",
+    "moneyline_away": "+444",
+    "provider": "DraftKings"
    }
   },
   {
@@ -347,15 +298,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.6145,
+   "home_win_prob": 0.6112,
    "prob_source": "moneyline",
    "odds": {
     "details": "SF -3.5",
     "spread_home": -3.5,
     "over_under": 46.5,
-    "moneyline_home": "-178",
-    "moneyline_away": "+149",
-    "provider": "Draft Kings"
+    "moneyline_home": "-175",
+    "moneyline_away": "+147",
+    "provider": "DraftKings"
    }
   },
   {
@@ -377,15 +328,15 @@
    "away_score": 0,
    "home_score": 0,
    "winner": null,
-   "home_win_prob": 0.2793,
+   "home_win_prob": 0.2818,
    "prob_source": "moneyline",
    "odds": {
     "details": "CIN -6",
     "spread_home": 6,
     "over_under": 54.5,
-    "moneyline_home": "+244",
-    "moneyline_away": "-300",
-    "provider": "Draft Kings"
+    "moneyline_home": "+241",
+    "moneyline_away": "-296",
+    "provider": "DraftKings"
    }
   }
  ]
